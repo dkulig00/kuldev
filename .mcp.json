@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "laravel-boost": {
+      "command": "sh",
+      "args": ["-c", "cd apps/api && exec php artisan boost:mcp"]
+    }
+  }
+}
