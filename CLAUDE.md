@@ -3,7 +3,13 @@
 Company website and portfolio of Dariusz Kulig (kuldev). Showcases projects
 with case studies, stack, screenshots and links to live demos.
 
-Always reply to the user in Polish. Code, comments, commits and docs: English.
+## Language
+
+- Always reply to the user in Polish.
+- Plans (plan mode, implementation plans, proposals for review) must be written
+  in Polish. Keep code identifiers, file paths, commands and commit messages
+  inside the plan in English.
+- Code, comments, commit messages and repository docs: English.
 
 ## Architecture
 
@@ -16,6 +22,7 @@ Monorepo, two independent apps:
 
 ## Commands
 
+- Start services (required for API tests): `docker compose up -d`
 - API QA (must pass): `cd apps/api && composer qa`
 - API autofix: `cd apps/api && composer fix`
 - API tests only: `cd apps/api && vendor/bin/pest`
@@ -23,6 +30,7 @@ Monorepo, two independent apps:
 
 ## Rules
 
+- If the database connection fails, ask the user to start Docker. Never change database config or switch to SQLite to make tests pass.
 - Every change in behavior comes with a test. No test = not done.
 - Mobile-first: every UI change must work at 375px width.
 - Never read, print or commit secrets (`.env` files).
