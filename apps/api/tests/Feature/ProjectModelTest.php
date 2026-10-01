@@ -2,6 +2,13 @@
 
 use App\Models\Project;
 use App\Models\Technology;
+use Database\Seeders\DatabaseSeeder;
+
+it('does not seed example projects outside the local environment', function (): void {
+    $this->seed(DatabaseSeeder::class);
+
+    expect(Project::count())->toBe(0);
+});
 
 it('creates a project via factory', function (): void {
     $project = Project::factory()->create();

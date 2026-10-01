@@ -24,10 +24,7 @@ class ProjectSeeder extends Seeder
         ];
 
         $technologies = collect($technologyNames)->mapWithKeys(
-            fn (string $name): array => [$name => Technology::factory()->create([
-                'name' => $name,
-                'slug' => Str::slug($name),
-            ])],
+            fn (string $name): array => [$name => Technology::firstOrCreate(['slug' => Str::slug($name)], ['name' => $name])]
         );
 
         $projects = [
@@ -58,14 +55,18 @@ class ProjectSeeder extends Seeder
         ];
 
         foreach ($projects as $data) {
-            $project = Project::factory()->published()->create([
-                'title' => $data['title'],
-                'slug' => Str::slug($data['title']),
-                'summary' => $data['summary'],
-                'repo_url' => $data['repo_url'],
-                'demo_url' => $data['demo_url'],
-                'sort_order' => $data['sort_order'],
-            ]);
+            $project = Project::query()->firstOrCreate(
+                ['slug' => Str::slug($data['title'])],
+                [
+                    'title' => $data['title'],
+                    'summary' => $data['summary'],
+                    'repo_url' => $data['repo_url'],
+                    'demo_url' => $data['demo_url'],
+                    'sort_order' => $data['sort_order'],
+                    'is_published' => true,
+                    'published_at' => now(),
+                ],
+            );
 
             $project->technologies()->attach(
                 collect($data['stack'])->map(function (string $name) use ($technologies): int {
