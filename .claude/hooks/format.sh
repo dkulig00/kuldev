@@ -10,7 +10,10 @@ case "$file" in
     cd "$CLAUDE_PROJECT_DIR/apps/api"
     vendor/bin/pint "$file" --quiet
     ;;
-  # apps/web: Prettier/ESLint added in stage 3
+    */apps/web/*.ts|*/apps/web/*.tsx|*/apps/web/*.css|*/apps/web/*.json|*/apps/web/*.md)
+    cd "$CLAUDE_PROJECT_DIR/apps/web"
+    pnpm exec prettier --write "$file" > /dev/null
+    ;;
 esac
 
 exit 0
