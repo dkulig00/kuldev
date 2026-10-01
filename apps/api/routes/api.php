@@ -6,3 +6,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user', fn (Request $request) => $request->user())->middleware('auth:sanctum');
 
 Route::get('/health', fn () => response()->json(['status' => 'ok']));
+
+Route::prefix('v1')->group(__DIR__.'/api_v1.php');
