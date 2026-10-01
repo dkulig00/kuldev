@@ -27,6 +27,8 @@ Monorepo, two independent apps:
 - API autofix: `cd apps/api && composer fix`
 - API tests only: `cd apps/api && vendor/bin/pest`
 - Web dev: `cd apps/web && pnpm dev`
+- Web QA (must pass): `cd apps/web && pnpm qa`
+- Web autofix: `cd apps/web && pnpm format`
 
 ## Rules
 
