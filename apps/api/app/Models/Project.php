@@ -12,7 +12,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property Carbon|null $published_at
+ */
 #[Fillable([
     'title',
     'slug',
@@ -29,9 +33,6 @@ class Project extends Model
     /** @use HasFactory<ProjectFactory> */
     use HasFactory;
 
-    /**
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
