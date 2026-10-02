@@ -18,6 +18,8 @@ jobs:
     defaults:
       run:
         working-directory: apps/api
+    env:
+      DB_DATABASE: kuldev_test
     services:
       postgres:
         image: postgres:18
