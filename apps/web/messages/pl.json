@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "title": "kuldev — strony www, aplikacje mobilne, automatyzacje AI",
+    "description": "Projektuję i wdrażam strony internetowe, aplikacje mobilne i automatyzacje oparte na AI. Konkretnie, nowocześnie, z charakterem."
+  },
+  "nav": {
+    "kontakt": "Kontakt"
+  },
+  "hero": {
+    "title": "Strony, aplikacje i automatyzacje, które robią różnicę",
+    "subtitle": "Projektuję i wdrażam produkty cyfrowe dla firm, które chcą wyglądać i działać inaczej niż konkurencja.",
+    "cta": "Wyceń projekt"
+  },
+  "contact": {
+    "heading": "Kontakt",
+    "body": "Opisz swój projekt, odpowiem z konkretną propozycją w 1-2 dni roboczych.",
+    "emailLabel": "Napisz e-mail"
+  }
+}
