@@ -41,7 +41,10 @@ Monorepo, two independent apps:
 - Mobile-first: every UI change must work at 375px width.
 - Never read, print or commit secrets (`.env` files).
 - Keep changes small and focused; one concern per commit.
-- Conventional Commits with scope: `feat(api): ...`, `fix(web): ...`, `test(api): ...`.
+- Conventional Commits with scope: `feat(api): ...`, `fix(web): ...`. Scope is
+  required when a commit touches only one app (`api` or `web`); it is optional
+  for repo-wide changes (e.g. `ci:`, `docs:`) that touch shared tooling, CI
+  config, or documentation outside a single app.
 - Do not add new dependencies without asking first.
 
 ## Definition of done
