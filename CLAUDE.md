@@ -10,6 +10,10 @@ with case studies, stack, screenshots and links to live demos.
   in Polish. Keep code identifiers, file paths, commands and commit messages
   inside the plan in English.
 - Code, comments, commit messages and repository docs: English.
+- Plans saved to `docs/plans/` follow the same Polish-language rule above and
+  use a date-prefixed filename (`YYYY-MM-DD-slug.md`). All other repository
+  docs (ADRs in `docs/decisions/`, README, code comments) stay in English per
+  the rule above.
 
 ## Architecture
 
