@@ -33,6 +33,7 @@ Monorepo, two independent apps:
 - Web dev: `cd apps/web && pnpm dev`
 - Web QA (must pass): `cd apps/web && pnpm qa`
 - Web autofix: `cd apps/web && pnpm format`
+- Web E2E tests (Playwright, not part of `qa`): `cd apps/web && pnpm test:e2e`
 
 ## Rules
 
