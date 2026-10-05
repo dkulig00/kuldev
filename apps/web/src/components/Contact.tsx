@@ -1,3 +1,5 @@
+import { devComponentProps } from '@/lib/dev-feedback/component-tag';
+
 interface ContactProps {
   heading: string;
   body: string;
@@ -12,7 +14,11 @@ export function Contact({
   emailLabel,
 }: Readonly<ContactProps>) {
   return (
-    <section id="kontakt" className="bg-panel px-4 py-16 sm:px-6 sm:py-24">
+    <section
+      {...devComponentProps('Contact', 'src/components/Contact.tsx')}
+      id="kontakt"
+      className="bg-panel px-4 py-16 sm:px-6 sm:py-24"
+    >
       <h2 className="font-display text-ink text-3xl font-bold sm:text-4xl">
         {heading}
       </h2>

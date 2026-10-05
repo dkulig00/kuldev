@@ -1,3 +1,5 @@
+import { devComponentProps } from '@/lib/dev-feedback/component-tag';
+
 interface HeroProps {
   title: string;
   subtitle: string;
@@ -12,7 +14,10 @@ export function Hero({
   ctaHref,
 }: Readonly<HeroProps>) {
   return (
-    <section className="px-4 py-16 sm:px-6 sm:py-24">
+    <section
+      {...devComponentProps('Hero', 'src/components/Hero.tsx')}
+      className="px-4 py-16 sm:px-6 sm:py-24"
+    >
       <h1 className="font-display text-ink text-4xl font-bold sm:text-5xl">
         {title}
       </h1>

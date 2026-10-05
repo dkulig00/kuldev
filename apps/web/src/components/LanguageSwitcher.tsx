@@ -1,5 +1,6 @@
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
+import { devComponentProps } from '@/lib/dev-feedback/component-tag';
 
 interface LanguageSwitcherProps {
   currentLocale: string;
@@ -14,7 +15,14 @@ export function LanguageSwitcher({
   currentLocale,
 }: Readonly<LanguageSwitcherProps>) {
   return (
-    <nav aria-label="Language switcher" className="flex gap-2">
+    <nav
+      {...devComponentProps(
+        'LanguageSwitcher',
+        'src/components/LanguageSwitcher.tsx',
+      )}
+      aria-label="Language switcher"
+      className="flex gap-2"
+    >
       {routing.locales.map((locale) => {
         const isActive = locale === currentLocale;
 

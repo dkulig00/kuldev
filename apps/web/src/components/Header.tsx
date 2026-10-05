@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/navigation';
+import { devComponentProps } from '@/lib/dev-feedback/component-tag';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface NavLinkItem {
@@ -20,7 +21,10 @@ export function Header({
   currentLocale,
 }: Readonly<HeaderProps>) {
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6">
+    <header
+      {...devComponentProps('Header', 'src/components/Header.tsx')}
+      className="flex flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6"
+    >
       <Link href="/" className="font-display text-ink text-xl font-bold">
         kuldev
       </Link>
