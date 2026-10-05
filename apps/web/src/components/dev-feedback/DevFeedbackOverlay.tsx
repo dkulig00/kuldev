@@ -26,6 +26,10 @@ export function DevFeedbackOverlay() {
   const [inspecting, setInspecting] = useState(false);
   const [hover, setHover] = useState<Hover | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
+  const [comment, setComment] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>(
+    'idle',
+  );
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -93,6 +97,40 @@ export function DevFeedbackOverlay() {
     textareaRef.current?.focus();
   }, [draft]);
 
+  async function submitFeedback() {
+    if (!draft) return;
+
+    setStatus('sending');
+    try {
+      const response = await fetch('/api/dev-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url: window.location.href,
+          language: document.documentElement.lang,
+          viewport: {
+            width: window.innerWidth,
+            height: window.innerHeight,
+          },
+          userAgent: navigator.userAgent,
+          selector: draft.selector,
+          componentName: draft.componentName,
+          componentFile: draft.componentFile,
+          textSnippet: draft.textSnippet,
+          comment: comment.trim(),
+        }),
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      setStatus('sent');
+      setComment('');
+      setDraft(null);
+    } catch {
+      setStatus('error');
+    }
+  }
+
   return (
     <div data-dev-feedback-ui data-dev-feedback-marker={OVERLAY_MARKER}>
       <button
@@ -148,17 +186,34 @@ export function DevFeedbackOverlay() {
           </dl>
           <textarea
             ref={textareaRef}
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
             aria-label="Komentarz"
             rows={4}
             className="border-ink/30 mt-4 w-full rounded-md border p-2"
           />
+
+          {status === 'error' && (
+            <p role="alert" className="mt-2 text-sm font-medium">
+              Nie udało się wysłać. Spróbuj ponownie.
+            </p>
+          )}
+
           <div className="mt-4 flex justify-end gap-2">
             <button
               type="button"
-              onClick={() => dialogRef.current?.close()}
+              onClick={() => setDraft(null)}
               className="min-h-11 px-4"
             >
               Anuluj
+            </button>
+            <button
+              type="button"
+              onClick={submitFeedback}
+              disabled={status === 'sending'}
+              className="bg-accent-amber text-background min-h-11 rounded-md px-4 font-medium disabled:opacity-60"
+            >
+              {status === 'sending' ? 'Wysyłanie…' : 'Wyślij'}
             </button>
           </div>
         </dialog>
