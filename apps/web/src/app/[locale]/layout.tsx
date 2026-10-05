@@ -1,3 +1,4 @@
+import { DevFeedbackOverlay } from '@/components/dev-feedback/DevFeedbackOverlay';
 import { getSiteUrl } from '@/config/site';
 import { bodyFont, headlineFont, monoFont } from '@/fonts';
 import { routing } from '@/i18n/routing';
@@ -44,6 +45,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        {process.env.NODE_ENV === 'development' && <DevFeedbackOverlay />}
       </body>
     </html>
   );
