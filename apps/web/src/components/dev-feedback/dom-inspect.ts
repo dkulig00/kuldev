@@ -8,8 +8,8 @@ export function isOverlayElement(el: Element): boolean {
 }
 
 // Nearest ancestor (or the element itself) tagged by devComponentProps.
-export function findNearestComponent(el: Element): Element | null {
-  return el.closest('[data-component]');
+export function findNearestComponent(el: Element): HTMLElement | null {
+  return el.closest<HTMLElement>('[data-component]');
 }
 
 // CSS path from <body> down to el, e.g. "body > main > section:nth-of-type(1)".
