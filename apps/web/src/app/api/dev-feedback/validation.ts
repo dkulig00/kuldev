@@ -73,3 +73,89 @@ export function resolveRepoRoot(start = process.cwd(), maxDepth = 10): string {
 export function isInsideDir(target: string, dir: string): boolean {
   return path.resolve(target).startsWith(path.resolve(dir) + path.sep);
 }
+
+export interface FeedbackPayload {
+  url: string;
+  language: string;
+  viewport: { width: number; height: number };
+  userAgent: string;
+  selector: string;
+  componentName: string;
+  componentFile: string;
+  textSnippet: string;
+  comment: string;
+}
+
+// Returns the value if it is a string within the limit, otherwise undefined.
+function readText(value: unknown, maxLength: number): string | undefined {
+  if (typeof value !== 'string' || value.length > maxLength) return undefined;
+  return value;
+}
+
+// Viewport sizes are whole numbers between 1 and 20000.
+function readDimension(value: unknown): number | undefined {
+  if (
+    typeof value === 'number' &&
+    Number.isInteger(value) &&
+    value >= 1 &&
+    value <= 20000
+  ) {
+    return value;
+  }
+  return undefined;
+}
+
+// Validates the whole request body. Returns undefined if any required field is wrong.
+export function readPayload(body: unknown): FeedbackPayload | undefined {
+  if (typeof body !== 'object' || body === null) return undefined;
+
+  const fields = body as Record<string, unknown>;
+  const viewport = fields.viewport as
+    Record<string, unknown> | null | undefined;
+  if (typeof viewport !== 'object' || viewport === null) return undefined;
+
+  const url = readText(fields.url, 2048);
+  const language = readText(fields.language, 10);
+  const userAgent = readText(fields.userAgent, 512);
+  const selector = readText(fields.selector, 1000);
+  const componentName = readText(fields.componentName, 200);
+  const componentFile =
+    fields.componentFile === undefined
+      ? ''
+      : readText(fields.componentFile, 300);
+  const width = readDimension(viewport.width);
+  const height = readDimension(viewport.height);
+  const comment = readComment(fields.comment);
+
+  if (
+    url === undefined ||
+    language === undefined ||
+    userAgent === undefined ||
+    selector === undefined ||
+    componentName === undefined ||
+    componentFile === undefined ||
+    width === undefined ||
+    height === undefined ||
+    comment === undefined
+  ) {
+    return undefined;
+  }
+
+  // Long snippets are cut, not rejected: they are only context for the AI.
+  const textSnippet =
+    typeof fields.textSnippet === 'string'
+      ? fields.textSnippet.slice(0, 1000)
+      : '';
+
+  return {
+    url,
+    language,
+    viewport: { width, height },
+    userAgent,
+    selector,
+    componentName,
+    componentFile,
+    textSnippet,
+    comment,
+  };
+}

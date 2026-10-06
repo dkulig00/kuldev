@@ -9,6 +9,7 @@ import {
   MAX_COMMENT_LENGTH,
   parseJson,
   readComment,
+  readPayload,
   resolveRepoRoot,
   toFileSlug,
 } from './validation';
@@ -125,5 +126,51 @@ describe('isInsideDir', () => {
 
   it('rejects a sibling directory that only shares the prefix', () => {
     expect(isInsideDir(`${dir}-evil/x.json`, dir)).toBe(false);
+  });
+});
+
+describe('readPayload', () => {
+  const valid = {
+    url: 'http://localhost:3000/pl',
+    language: 'pl',
+    viewport: { width: 375, height: 800 },
+    userAgent: 'test-agent',
+    selector: 'body > main > section',
+    componentName: 'Hero',
+    componentFile: 'src/components/Hero.tsx',
+    textSnippet: 'Tytuł',
+    comment: 'popraw odstęp',
+  };
+
+  it('accepts a complete payload', () => {
+    expect(readPayload(valid)).toEqual(valid);
+  });
+
+  it('rejects a non-object body', () => {
+    expect(readPayload('tekst')).toBeUndefined();
+  });
+
+  it('rejects a viewport that is not a positive integer', () => {
+    expect(
+      readPayload({ ...valid, viewport: { width: 0, height: 800 } }),
+    ).toBeUndefined();
+  });
+
+  it('rejects a componentName longer than 200 characters', () => {
+    expect(
+      readPayload({ ...valid, componentName: 'a'.repeat(201) }),
+    ).toBeUndefined();
+  });
+
+  it('cuts a long textSnippet to 1000 characters instead of rejecting', () => {
+    const result = readPayload({ ...valid, textSnippet: 'a'.repeat(1500) });
+
+    expect(result?.textSnippet).toHaveLength(1000);
+  });
+
+  it('defaults componentFile to an empty string when it is absent', () => {
+    const withoutFile = { ...valid, componentFile: undefined };
+
+    expect(readPayload(withoutFile)?.componentFile).toBe('');
   });
 });
