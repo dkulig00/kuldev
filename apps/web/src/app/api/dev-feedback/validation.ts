@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+
 export function isSameOrigin(
   origin: string | null,
   host: string | null,
@@ -48,4 +51,25 @@ export function toFileSlug(componentName: string): string {
       .toLowerCase()
       .slice(0, 60) || 'unknown'
   );
+}
+
+// Walks up from `start` until a directory containing .git is found.
+// Falls back to `start` itself if none is found within maxDepth levels.
+export function resolveRepoRoot(start = process.cwd(), maxDepth = 10): string {
+  let dir = path.resolve(start);
+
+  for (let depth = 0; depth < maxDepth; depth++) {
+    if (existsSync(path.join(dir, '.git'))) return dir;
+
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+
+  return path.resolve(start);
+}
+
+// True only if `target` resolves to a location strictly inside `dir`.
+export function isInsideDir(target: string, dir: string): boolean {
+  return path.resolve(target).startsWith(path.resolve(dir) + path.sep);
 }

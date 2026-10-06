@@ -1,11 +1,15 @@
+import { existsSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   isBodyTooLarge,
+  isInsideDir,
   isSameOrigin,
   MAX_BODY_BYTES,
   MAX_COMMENT_LENGTH,
   parseJson,
   readComment,
+  resolveRepoRoot,
   toFileSlug,
 } from './validation';
 
@@ -97,5 +101,29 @@ describe('toFileSlug', () => {
 
   it('cuts the slug to 60 characters', () => {
     expect(toFileSlug('a'.repeat(100))).toHaveLength(60);
+  });
+});
+
+describe('resolveRepoRoot', () => {
+  it('finds the directory that contains .git, starting from apps/web', () => {
+    const root = resolveRepoRoot(import.meta.dirname);
+
+    expect(existsSync(path.join(root, '.git'))).toBe(true);
+  });
+});
+
+describe('isInsideDir', () => {
+  const dir = path.resolve('/repo/.ai-feedback');
+
+  it('accepts a file directly inside the directory', () => {
+    expect(isInsideDir(path.join(dir, 'x.json'), dir)).toBe(true);
+  });
+
+  it('rejects path traversal out of the directory', () => {
+    expect(isInsideDir(path.join(dir, '..', 'secret.json'), dir)).toBe(false);
+  });
+
+  it('rejects a sibling directory that only shares the prefix', () => {
+    expect(isInsideDir(`${dir}-evil/x.json`, dir)).toBe(false);
   });
 });
