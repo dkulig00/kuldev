@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { POST } from './route';
+import { MAX_BODY_BYTES } from './validation';
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -64,5 +65,15 @@ describe('POST /api/dev-feedback', () => {
     const response = POST(jsonRequest('application/json'));
 
     expect(response.status).toBe(501);
+  });
+
+  it('returns 413 when the declared body is larger than 50 kB', () => {
+    vi.stubEnv('NODE_ENV', 'development');
+    const request = jsonRequest('application/json');
+    request.headers.set('content-length', String(MAX_BODY_BYTES + 1));
+
+    const response = POST(request);
+
+    expect(response.status).toBe(413);
   });
 });

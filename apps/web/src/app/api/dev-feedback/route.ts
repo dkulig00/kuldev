@@ -1,4 +1,4 @@
-import { isSameOrigin } from './validation';
+import { isBodyTooLarge, isSameOrigin } from './validation';
 
 // Dev-only endpoint: outside `next dev` it must behave as if it does not exist.
 export function POST(request: Request) {
@@ -16,6 +16,10 @@ export function POST(request: Request) {
   const host = request.headers.get('host');
   if (!isSameOrigin(origin, host)) {
     return new Response(null, { status: 403 });
+  }
+
+  if (isBodyTooLarge(request.headers.get('content-length'))) {
+    return new Response(null, { status: 413 });
   }
 
   // Placeholder until validation and file writing are added.
