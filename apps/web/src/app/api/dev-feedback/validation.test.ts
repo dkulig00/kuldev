@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { isBodyTooLarge, isSameOrigin, MAX_BODY_BYTES } from './validation';
+import {
+  isBodyTooLarge,
+  isSameOrigin,
+  MAX_BODY_BYTES,
+  parseJson,
+} from './validation';
 
 describe('isSameOrigin', () => {
   it('accepts an origin whose host and port match the Host header', () => {
@@ -33,5 +38,15 @@ describe('isBodyTooLarge', () => {
 
   it('does not treat a missing Content-Length as too large', () => {
     expect(isBodyTooLarge(null)).toBe(false);
+  });
+});
+
+describe('parseJson', () => {
+  it('returns the parsed value for valid JSON', () => {
+    expect(parseJson('{"comment":"ok"}')).toEqual({ comment: 'ok' });
+  });
+
+  it('returns undefined for invalid JSON', () => {
+    expect(parseJson('{not json')).toBeUndefined();
   });
 });

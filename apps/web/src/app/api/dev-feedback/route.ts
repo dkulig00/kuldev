@@ -1,7 +1,12 @@
-import { isBodyTooLarge, isSameOrigin } from './validation';
+import {
+  isBodyTooLarge,
+  isSameOrigin,
+  MAX_BODY_BYTES,
+  parseJson,
+} from './validation';
 
 // Dev-only endpoint: outside `next dev` it must behave as if it does not exist.
-export function POST(request: Request) {
+export async function POST(request: Request) {
   if (process.env.NODE_ENV !== 'development') {
     return new Response(null, { status: 404 });
   }
@@ -20,6 +25,16 @@ export function POST(request: Request) {
 
   if (isBodyTooLarge(request.headers.get('content-length'))) {
     return new Response(null, { status: 413 });
+  }
+
+  // The declared size can be missing or wrong, so measure what actually arrived.
+  const text = await request.text();
+  if (new TextEncoder().encode(text).byteLength > MAX_BODY_BYTES) {
+    return new Response(null, { status: 413 });
+  }
+
+  if (parseJson(text) === undefined) {
+    return new Response(null, { status: 400 });
   }
 
   // Placeholder until validation and file writing are added.
