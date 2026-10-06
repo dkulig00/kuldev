@@ -83,6 +83,12 @@ jobs:
 
       - run: pnpm build
 
+      - name: Verify dev feedback overlay is excluded from the production bundle
+        run: |
+          if grep -rl "__KULDEV_DEV_FEEDBACK_OVERLAY__" .next/static; then
+            echo "::error::Dev feedback overlay marker leaked into the production bundle"
+            exit 1
+          fi
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -118,6 +124,8 @@ jobs:
       - run: pnpm build
 
       - run: pnpm exec playwright test
+
+      - run: pnpm test:e2e:dev-feedback
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
