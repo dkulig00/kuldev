@@ -1,9 +1,11 @@
+import { saveFeedback } from './storage';
 import {
   isBodyTooLarge,
   isSameOrigin,
   MAX_BODY_BYTES,
   parseJson,
-  readComment,
+  readPayload,
+  resolveRepoRoot,
 } from './validation';
 
 // Dev-only endpoint: outside `next dev` it must behave as if it does not exist.
@@ -34,16 +36,12 @@ export async function POST(request: Request) {
     return new Response(null, { status: 413 });
   }
 
-  const body = parseJson(text);
-  if (typeof body !== 'object' || body === null) {
+  // readPayload also rejects invalid JSON, because parseJson returns undefined for it.
+  const payload = readPayload(parseJson(text));
+  if (payload === undefined) {
     return new Response(null, { status: 400 });
   }
 
-  const comment = readComment('comment' in body ? body.comment : undefined);
-  if (comment === undefined) {
-    return new Response(null, { status: 400 });
-  }
-
-  // Placeholder until validation and file writing are added.
-  return new Response(null, { status: 501 });
+  await saveFeedback(payload, resolveRepoRoot());
+  return new Response(null, { status: 201 });
 }

@@ -3,14 +3,31 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { POST } from './route';
 import { MAX_BODY_BYTES } from './validation';
 
+// Mocked so route tests never write real files into .ai-feedback/.
+const storage = vi.hoisted(() => ({ saveFeedback: vi.fn() }));
+vi.mock('./storage', () => storage);
+
+const validBody = JSON.stringify({
+  url: 'http://localhost:3000/pl',
+  language: 'pl',
+  viewport: { width: 375, height: 800 },
+  userAgent: 'test-agent',
+  selector: 'body > main > section',
+  componentName: 'Hero',
+  componentFile: 'src/components/Hero.tsx',
+  textSnippet: 'Tytuł',
+  comment: 'popraw odstęp',
+});
+
 afterEach(() => {
   vi.unstubAllEnvs();
+  storage.saveFeedback.mockReset();
 });
 
 function jsonRequest(
   contentType: string,
   origin: string | null = 'http://localhost:3000',
-  body = '{}',
+  body = validBody,
 ) {
   const headers: Record<string, string> = {
     'Content-Type': contentType,
@@ -91,21 +108,7 @@ describe('POST /api/dev-feedback', () => {
     expect(response.status).toBe(400);
   });
 
-  it('passes the checks for a valid same-origin request', async () => {
-    vi.stubEnv('NODE_ENV', 'development');
-
-    const response = await POST(
-      jsonRequest(
-        'application/json',
-        'http://localhost:3000',
-        '{"comment":"ok"}',
-      ),
-    );
-
-    expect(response.status).toBe(501);
-  });
-
-  it('returns 400 when comment is missing', async () => {
+  it('returns 400 when required fields are missing', async () => {
     vi.stubEnv('NODE_ENV', 'development');
 
     const response = await POST(
@@ -113,5 +116,21 @@ describe('POST /api/dev-feedback', () => {
     );
 
     expect(response.status).toBe(400);
+  });
+
+  it('saves a valid same-origin request and returns 201', async () => {
+    vi.stubEnv('NODE_ENV', 'development');
+    storage.saveFeedback.mockResolvedValue('/repo/.ai-feedback/x.json');
+
+    const response = await POST(jsonRequest('application/json'));
+
+    expect(response.status).toBe(201);
+    expect(storage.saveFeedback).toHaveBeenCalledWith(
+      expect.objectContaining({
+        componentName: 'Hero',
+        comment: 'popraw odstęp',
+      }),
+      expect.any(String),
+    );
   });
 });
