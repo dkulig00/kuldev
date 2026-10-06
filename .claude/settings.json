@@ -8,6 +8,7 @@
       "Bash(vendor/bin/pest:*)"
     ],
     "deny": [
+      "Bash(gh pr merge:*)",
       "Read(./**/.env)",
       "Read(./**/.env.*)",
       "Edit(./**/.env)",
@@ -43,6 +44,16 @@
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/qa-gate.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/feedback-reminder.sh"
           }
         ]
       }
