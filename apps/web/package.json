@@ -12,6 +12,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run --passWithNoTests",
     "test:e2e": "playwright test",
+    "test:e2e:dev-feedback": "playwright test --config=playwright.dev.config.ts",
     "qa": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test"
   },
   "dependencies": {

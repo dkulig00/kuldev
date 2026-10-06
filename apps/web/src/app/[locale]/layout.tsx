@@ -4,9 +4,19 @@ import { routing } from '@/i18n/routing';
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import dynamic from 'next/dynamic';
 import * as rootParams from 'next/root-params';
 import { ReactNode } from 'react';
 import '../globals.css';
+
+const DevFeedbackOverlay =
+  process.env.NODE_ENV === 'development'
+    ? dynamic(() =>
+        import('@/components/dev-feedback/DevFeedbackOverlay').then(
+          (module) => module.DevFeedbackOverlay,
+        ),
+      )
+    : null;
 
 export const dynamicParams = false;
 
@@ -44,6 +54,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        {DevFeedbackOverlay && <DevFeedbackOverlay />}
       </body>
     </html>
   );

@@ -15,6 +15,17 @@
     ]
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); echo \"$input\" | grep -qE 'git commit|gh pr (create|edit|merge)' && echo \"$input\" | grep -qiE 'Co-Authored-By|Claude-Session|Generated with' && { echo 'Blocked: no attribution trailers in commits or PRs' >&2; exit 2; }; exit 0"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write|MultiEdit",
