@@ -3,7 +3,9 @@ import {
   isBodyTooLarge,
   isSameOrigin,
   MAX_BODY_BYTES,
+  MAX_COMMENT_LENGTH,
   parseJson,
+  readComment,
 } from './validation';
 
 describe('isSameOrigin', () => {
@@ -48,5 +50,28 @@ describe('parseJson', () => {
 
   it('returns undefined for invalid JSON', () => {
     expect(parseJson('{not json')).toBeUndefined();
+  });
+});
+
+describe('readComment', () => {
+  it('returns the trimmed comment', () => {
+    expect(readComment('  popraw nagłówek  ')).toBe('popraw nagłówek');
+  });
+
+  it('rejects empty or whitespace-only comments', () => {
+    expect(readComment('')).toBeUndefined();
+    expect(readComment('   \n  ')).toBeUndefined();
+  });
+
+  it('rejects non-string values', () => {
+    expect(readComment(42)).toBeUndefined();
+    expect(readComment(null)).toBeUndefined();
+  });
+
+  it('accepts exactly the maximum length and rejects one more', () => {
+    expect(readComment('a'.repeat(MAX_COMMENT_LENGTH))).toHaveLength(
+      MAX_COMMENT_LENGTH,
+    );
+    expect(readComment('a'.repeat(MAX_COMMENT_LENGTH + 1))).toBeUndefined();
   });
 });

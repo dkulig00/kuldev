@@ -3,6 +3,7 @@ import {
   isSameOrigin,
   MAX_BODY_BYTES,
   parseJson,
+  readComment,
 } from './validation';
 
 // Dev-only endpoint: outside `next dev` it must behave as if it does not exist.
@@ -33,7 +34,13 @@ export async function POST(request: Request) {
     return new Response(null, { status: 413 });
   }
 
-  if (parseJson(text) === undefined) {
+  const body = parseJson(text);
+  if (typeof body !== 'object' || body === null) {
+    return new Response(null, { status: 400 });
+  }
+
+  const comment = readComment('comment' in body ? body.comment : undefined);
+  if (comment === undefined) {
     return new Response(null, { status: 400 });
   }
 

@@ -104,4 +104,14 @@ describe('POST /api/dev-feedback', () => {
 
     expect(response.status).toBe(501);
   });
+
+  it('returns 400 when comment is missing', async () => {
+    vi.stubEnv('NODE_ENV', 'development');
+
+    const response = await POST(
+      jsonRequest('application/json', 'http://localhost:3000', '{}'),
+    );
+
+    expect(response.status).toBe(400);
+  });
 });

@@ -25,3 +25,17 @@ export function parseJson(text: string): unknown {
     return undefined;
   }
 }
+
+export const MAX_COMMENT_LENGTH = 5000;
+
+// Narrows unknown JSON to a trimmed comment of 1–5000 characters, or undefined.
+export function readComment(value: unknown): string | undefined {
+  if (typeof value !== 'string') return undefined;
+
+  const trimmed = value.trim();
+  if (trimmed.length === 0 || trimmed.length > MAX_COMMENT_LENGTH) {
+    return undefined;
+  }
+
+  return trimmed;
+}
