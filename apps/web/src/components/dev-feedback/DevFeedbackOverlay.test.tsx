@@ -125,6 +125,10 @@ describe('submit', () => {
       componentFile: 'src/components/Hero.tsx',
       comment: 'Za mały tekst',
     });
+
+    expect(await screen.findByRole('status')).toHaveTextContent(
+      'Zapisano uwagę',
+    );
   });
 
   it('keeps the dialog and the comment when the request fails', async () => {

@@ -7,6 +7,7 @@ import {
   findNearestComponent,
   isOverlayElement,
 } from './dom-inspect';
+import { StatusMessage } from './StatusMessage';
 
 interface Hover {
   name: string;
@@ -97,6 +98,13 @@ export function DevFeedbackOverlay() {
     textareaRef.current?.focus();
   }, [draft]);
 
+  useEffect(() => {
+    if (status !== 'sent') return;
+
+    const timer = setTimeout(() => setStatus('idle'), 3000);
+    return () => clearTimeout(timer);
+  }, [status]);
+
   async function submitFeedback() {
     if (!draft) return;
 
@@ -141,6 +149,12 @@ export function DevFeedbackOverlay() {
       >
         {inspecting ? 'Wyłącz zaznaczanie' : 'Zaznacz element'}
       </button>
+
+      {status === 'sent' && (
+        <div className="animate-slide-down fixed top-4 left-1/2 z-50 -translate-x-1/2 motion-reduce:animate-none">
+          <StatusMessage variant="success">Zapisano uwagę</StatusMessage>
+        </div>
+      )}
 
       {hover && (
         <div
