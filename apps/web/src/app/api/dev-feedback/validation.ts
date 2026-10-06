@@ -10,3 +10,9 @@ export function isSameOrigin(
     return false;
   }
 }
+
+export const MAX_BODY_BYTES = 50 * 1024;
+
+export function isBodyTooLarge(contentLength: string | null): boolean {
+  return Number(contentLength ?? 0) > MAX_BODY_BYTES;
+}

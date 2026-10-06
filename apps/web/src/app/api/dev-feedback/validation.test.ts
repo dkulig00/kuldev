@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isSameOrigin } from './validation';
+import { isBodyTooLarge, isSameOrigin, MAX_BODY_BYTES } from './validation';
 
 describe('isSameOrigin', () => {
   it('accepts an origin whose host and port match the Host header', () => {
@@ -19,5 +19,19 @@ describe('isSameOrigin', () => {
 
   it('rejects a malformed Origin such as "null"', () => {
     expect(isSameOrigin('null', 'localhost:3000')).toBe(false);
+  });
+});
+
+describe('isBodyTooLarge', () => {
+  it('accepts a body exactly at the limit', () => {
+    expect(isBodyTooLarge(String(MAX_BODY_BYTES))).toBe(false);
+  });
+
+  it('rejects a body one byte over the limit', () => {
+    expect(isBodyTooLarge(String(MAX_BODY_BYTES + 1))).toBe(true);
+  });
+
+  it('does not treat a missing Content-Length as too large', () => {
+    expect(isBodyTooLarge(null)).toBe(false);
   });
 });
