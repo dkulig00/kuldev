@@ -39,3 +39,13 @@ export function readComment(value: unknown): string | undefined {
 
   return trimmed;
 }
+
+// Reduces a component name to [a-z0-9_-], so it is safe inside a file name.
+export function toFileSlug(componentName: string): string {
+  return (
+    componentName
+      .replace(/[^a-zA-Z0-9_-]+/g, '-')
+      .toLowerCase()
+      .slice(0, 60) || 'unknown'
+  );
+}

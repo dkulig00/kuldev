@@ -6,6 +6,7 @@ import {
   MAX_COMMENT_LENGTH,
   parseJson,
   readComment,
+  toFileSlug,
 } from './validation';
 
 describe('isSameOrigin', () => {
@@ -73,5 +74,28 @@ describe('readComment', () => {
       MAX_COMMENT_LENGTH,
     );
     expect(readComment('a'.repeat(MAX_COMMENT_LENGTH + 1))).toBeUndefined();
+  });
+});
+
+describe('toFileSlug', () => {
+  it('lowercases a normal component name', () => {
+    expect(toFileSlug('Hero')).toBe('hero');
+  });
+
+  it('removes path traversal characters', () => {
+    const slug = toFileSlug('../../etc/passwd');
+
+    expect(slug).toMatch(/^[a-z0-9_-]+$/);
+    expect(slug).not.toContain('..');
+    expect(slug).not.toContain('/');
+  });
+
+  it('falls back to "unknown" when nothing safe is left', () => {
+    expect(toFileSlug('')).toBe('unknown');
+    expect(toFileSlug('...')).toBe('-');
+  });
+
+  it('cuts the slug to 60 characters', () => {
+    expect(toFileSlug('a'.repeat(100))).toHaveLength(60);
   });
 });
