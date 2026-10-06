@@ -28,10 +28,8 @@ description: Create git commits, open pull requests and merge pull requests in k
 4. Commit with `git commit -F <file>` or a heredoc, so the message is exactly what was written.
 5. Check the result with `git log -1 --format=%B` and confirm there are no trailers.
 6. For a PR, run `gh pr create` with a title in Conventional Commits format and a body that has no footer.
-7. Do not push unless the user asks.
+7. Do not push unless the user asks, or a skill that called this one has a push step the user already confirmed (e.g. `apply-feedback`).
 
 ## Merging a PR
 
-- Merge only when the user asks for it, and check branch protection first.
-- Use `gh pr merge <number> --squash --subject "<title>" --body ""`. The empty body stops GitHub from copying trailers from the branch commits into the squash message.
-- The title must follow Conventional Commits, e.g. `feat(web): ...`.
+Never merge a PR. The user reviews and squash-merges it themselves (`gh pr merge` is denied in `.claude/settings.json`).
