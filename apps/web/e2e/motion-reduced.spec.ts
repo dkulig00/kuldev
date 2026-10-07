@@ -1,4 +1,4 @@
-import { expect, Locator, test } from '@playwright/test';
+import { expect, Locator, Page, test } from '@playwright/test';
 
 async function visualState(locator: Locator) {
   return locator.evaluate((element) => {
@@ -9,6 +9,10 @@ async function visualState(locator: Locator) {
 }
 
 const fullyVisible = { opacity: '1', transform: 'none' };
+
+async function servicesText(page: Page) {
+  return page.locator('#uslugi').locator('h2, h3, p, li li, a').all();
+}
 
 for (const locale of ['pl', 'en']) {
   test.describe(`content visibility with reduced motion (${locale})`, () => {
@@ -28,6 +32,38 @@ for (const locale of ['pl', 'en']) {
 
       await reveal.scrollIntoViewIfNeeded();
       expect(await visualState(reveal)).toEqual(fullyVisible);
+    });
+
+    test('services content is visible and faders stay static', async ({
+      page,
+    }) => {
+      await page.goto(`/${locale}`);
+      await page.waitForLoadState('networkidle');
+
+      const faders = page.locator('#uslugi [data-scroll]');
+      await expect(faders).toHaveCount(8);
+      for (const fader of await faders.all()) {
+        await expect(fader).toHaveAttribute('data-scroll', 'static');
+      }
+
+      for (const text of await servicesText(page)) {
+        await text.scrollIntoViewIfNeeded();
+        expect(await visualState(text)).toEqual(fullyVisible);
+      }
+    });
+  });
+
+  test.describe(`services without JavaScript (${locale})`, () => {
+    test.use({ javaScriptEnabled: false });
+
+    test('services content is visible', async ({ page }) => {
+      await page.goto(`/${locale}`);
+
+      for (const text of await servicesText(page)) {
+        await text.scrollIntoViewIfNeeded();
+        await expect(text).toBeVisible();
+        expect(await visualState(text)).toEqual(fullyVisible);
+      }
     });
   });
 
