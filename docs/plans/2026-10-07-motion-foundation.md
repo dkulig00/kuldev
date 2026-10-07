@@ -1,5 +1,28 @@
 # Fundament animacji (Motion) dla apps/web — kierunek „Studio”
 
+## Odstępstwa od planu (decyzje podjęte w trakcie)
+
+1. **`regex` zamiast `group` w regule ESLint.** Wzorzec `'motion'` w `group`
+   działa jak `.gitignore` i pasował do segmentu `@/components/motion`, przez co
+   blokował własne prymitywy. Reguła używa `regex: '^(framer-)?motion(/.*)?$'`;
+   test pilnuje, że import z `@/components/motion` przechodzi.
+2. **Mock `useReducedMotion` zamiast `matchMedia`.** Motion odczytuje preferencję
+   raz na moduł, więc przełączanie `matchMedia` między testami nie działa.
+   `Reveal.test.tsx` podmienia hook przez `vi.mock('motion/react')`.
+3. **`IntersectionObserver` w `vitest.setup.ts` jako klasa z polami `vi.fn()`.**
+   Puste metody zgłaszał SonarQube (S1186).
+4. **`afterEach(cleanup)` w testach komponentów.** Vitest działa bez `globals`,
+   więc Testing Library nie sprząta automatycznie między testami.
+5. **Loader `domAnimation` zwraca `module.default`.** `LazyMotion` oczekuje samego
+   pakietu funkcji, nie modułu (sprawdzone w źródłach `motion` 14.0.0).
+6. **`setState` w `useLayoutEffect` w `Reveal`.** Reguła
+   `react-hooks/set-state-in-effect` dopuszcza go, bo wartość pochodzi z pomiaru
+   elementu przez `ref`. Odrzucono `useAnimationControls`: przed załadowaniem
+   `domAnimation` kontrolki nie mają subskrybentów i ukrycie by przepadło.
+7. **Viewport 375×400 i `networkidle` w `motion-reduced.spec.ts`.** Na dużym
+   ekranie Kontakt jest od razu widoczny i test przechodziłby bez sprawdzania
+   czegokolwiek; `networkidle` gwarantuje sprawdzenie po hydratacji.
+
 ## Kontekst
 
 Kierunek „Studio” (ADR 0002) zakłada stronę z charakterem, ale `apps/web` nie ma

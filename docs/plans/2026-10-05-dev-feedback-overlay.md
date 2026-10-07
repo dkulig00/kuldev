@@ -1,7 +1,5 @@
 # Nakładka deweloperska „zaznacz i skomentuj dla AI” (apps/web)
 
-Status: zrealizowane, scalone w PR #12 (commit `4dd5c44` na `main`).
-
 ## Kontekst
 
 Deweloper chce wskazać na stronie problem myszką albo dotykiem zamiast opisywać
