@@ -1,6 +1,6 @@
 import { isLinkedFromHash } from './hash-link';
 
-interface RevealContext {
+interface ScrollTransformContext {
   element: Element;
   top: number;
   viewportHeight: number;
@@ -8,13 +8,13 @@ interface RevealContext {
   reducedMotion: boolean;
 }
 
-export function shouldArmReveal({
+export function shouldActivateScrollTransform({
   element,
   top,
   viewportHeight,
   hash,
   reducedMotion,
-}: Readonly<RevealContext>): boolean {
+}: Readonly<ScrollTransformContext>): boolean {
   if (reducedMotion || top <= viewportHeight) {
     return false;
   }

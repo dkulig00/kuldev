@@ -4,5 +4,6 @@ export interface NavItem {
 }
 
 export const navigationItems: NavItem[] = [
+  { id: 'uslugi', labelKey: 'nav.uslugi' },
   { id: 'kontakt', labelKey: 'nav.kontakt' },
 ];
