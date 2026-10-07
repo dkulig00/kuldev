@@ -57,6 +57,22 @@ describe('ScrollTransform', () => {
     expect(wrapper()).toHaveAttribute('data-scroll', 'active');
   });
 
+  it('moves an activated element to its start state at once', () => {
+    placeElementAt(2000);
+
+    render(renderFader());
+
+    expect(wrapper()?.style.transform).toContain('translateY(85%)');
+  });
+
+  it('keeps a static element in its end state', () => {
+    placeElementAt(100);
+
+    render(renderFader());
+
+    expect(wrapper()?.style.transform).toContain('translateY(25%)');
+  });
+
   it('keeps an element inside the viewport static', () => {
     placeElementAt(100);
 
