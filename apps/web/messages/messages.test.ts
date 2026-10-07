@@ -2,14 +2,18 @@ import { describe, expect, it } from 'vitest';
 import en from './en.json';
 import pl from './pl.json';
 
-function flattenKeys(value: unknown, prefix = ''): string[] {
+function flattenEntries(value: unknown, prefix = ''): [string, string][] {
   if (typeof value !== 'object' || value === null) {
-    return [prefix];
+    return [[prefix, String(value)]];
   }
 
   return Object.entries(value).flatMap(([key, nested]) =>
-    flattenKeys(nested, prefix ? `${prefix}.${key}` : key),
+    flattenEntries(nested, prefix ? `${prefix}.${key}` : key),
   );
+}
+
+function flattenKeys(value: unknown): string[] {
+  return flattenEntries(value).map(([key]) => key);
 }
 
 describe('messages', () => {
@@ -18,5 +22,16 @@ describe('messages', () => {
     const enKeys = flattenKeys(en).sort();
 
     expect(enKeys).toEqual(plKeys);
+  });
+
+  it.each([
+    ['pl', pl],
+    ['en', en],
+  ])('%s.json contains no em or en dashes', (_, messages) => {
+    const withDashes = flattenEntries(messages).filter(([, text]) =>
+      /[—–]/.test(text),
+    );
+
+    expect(withDashes).toEqual([]);
   });
 });

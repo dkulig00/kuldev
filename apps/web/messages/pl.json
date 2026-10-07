@@ -1,15 +1,62 @@
 {
   "metadata": {
-    "title": "kuldev — strony www, aplikacje mobilne, automatyzacje AI",
+    "title": "kuldev | strony www, aplikacje mobilne, automatyzacje AI",
     "description": "Projektuję i wdrażam strony internetowe, aplikacje mobilne i automatyzacje oparte na AI. Konkretnie, nowocześnie, z charakterem."
   },
   "nav": {
+    "uslugi": "Usługi",
     "kontakt": "Kontakt"
   },
   "hero": {
     "title": "Automatyzacje. AI first",
     "subtitle": "Projektuję i wdrażam produkty cyfrowe dla firm, które chcą wyglądać i działać inaczej niż konkurencja.",
     "cta": "Wyceń projekt"
+  },
+  "services": {
+    "heading": "Usługi",
+    "items": {
+      "web": {
+        "title": "Strony i aplikacje internetowe",
+        "description": "Strony firmowe, sklepy i aplikacje w przeglądarce, projektowane od zera pod Twoją firmę, bez gotowych szablonów.",
+        "features": [
+          "szybkie na telefonie i komputerze, przyjazne wyszukiwarkom",
+          "dostępne dla każdego użytkownika (standard WCAG)",
+          "optymalizacja istniejących stron: szybkość, SEO, wygoda"
+        ],
+        "cta": "Zapytaj o strony i aplikacje"
+      },
+      "mobile": {
+        "title": "Aplikacje mobilne",
+        "description": "Aplikacje na telefon dla Twoich klientów albo zespołu: rezerwacje, zamówienia, obsługa zleceń w terenie.",
+        "features": [
+          "jedna aplikacja na Androida i iPhone'a",
+          "połączona z Twoimi systemami i danymi",
+          "zaprojektowana pod dotyk, a nie przeniesiona ze strony"
+        ],
+        "cta": "Zapytaj o aplikacje mobilne"
+      },
+      "automation": {
+        "title": "Automatyzacje i agenci AI",
+        "description": "Oprogramowanie, które przejmuje powtarzalną pracę: raporty, dokumenty, obsługę zapytań, przepływ danych między systemami.",
+        "features": [
+          "analiza, gdzie Twój zespół traci najwięcej czasu",
+          "agenci AI odpowiadający na pytania klientów albo pracujący na firmowych dokumentach",
+          "integracje z narzędziami, których już używasz"
+        ],
+        "cta": "Zapytaj o automatyzacje i agentów AI"
+      },
+      "design": {
+        "title": "Projektowanie UX/UI",
+        "description": "Projekt interfejsu, zanim powstanie kod: jak klient ma się poruszać po stronie lub aplikacji, żeby szybko zrobić to, po co przyszedł.",
+        "features": [
+          "makiety i projekt wizualny dopasowany do Twojej marki",
+          "testy na prawdziwych rozmiarach ekranów",
+          "spójny system wyglądu na lata rozwoju"
+        ],
+        "cta": "Zapytaj o projekt UX/UI"
+      }
+    },
+    "closing": "Każdy projekt buduję od zera i dostarczam z testami automatycznymi. Zanim cokolwiek trafi do Ciebie, kod przechodzi kontrolę jakości, sprawdzenie dostępności i testy na telefonach. Dostajesz produkt, który działa dziś i da się rozwijać jutro."
   },
   "contact": {
     "heading": "Kontakt",

@@ -1,15 +1,62 @@
 {
   "metadata": {
-    "title": "kuldev — websites, mobile apps, AI automations",
+    "title": "kuldev | websites, mobile apps, AI automations",
     "description": "I design and build websites, mobile apps and AI-powered automations. Modern, concrete, with character."
   },
   "nav": {
+    "uslugi": "Services",
     "kontakt": "Contact"
   },
   "hero": {
     "title": "Automations. AI first",
     "subtitle": "I design and build digital products for businesses that want to look and work differently from the competition.",
     "cta": "Get a quote"
+  },
+  "services": {
+    "heading": "Services",
+    "items": {
+      "web": {
+        "title": "Websites and web apps",
+        "description": "Company websites, online stores and browser-based apps, designed from scratch for your business. No off-the-shelf templates.",
+        "features": [
+          "fast on phones and desktops, easy for search engines to find",
+          "accessible to every user (WCAG standard)",
+          "tune-ups for existing sites: speed, SEO, ease of use"
+        ],
+        "cta": "Ask about websites and web apps"
+      },
+      "mobile": {
+        "title": "Mobile apps",
+        "description": "Phone apps for your customers or your team: bookings, orders, managing jobs in the field.",
+        "features": [
+          "one app for both Android and iPhone",
+          "connected to your systems and data",
+          "designed for touch, not squeezed down from a website"
+        ],
+        "cta": "Ask about mobile apps"
+      },
+      "automation": {
+        "title": "Automations and AI agents",
+        "description": "Software that takes over repetitive work: reports, documents, handling enquiries, moving data between systems.",
+        "features": [
+          "finding where your team loses the most time",
+          "AI agents that answer customer questions or work with your company documents",
+          "integrations with the tools you already use"
+        ],
+        "cta": "Ask about automations and AI agents"
+      },
+      "design": {
+        "title": "UX/UI design",
+        "description": "Interface design before any code is written: how customers should move through your site or app to quickly do what they came for.",
+        "features": [
+          "wireframes and visual design that fit your brand",
+          "testing on real screen sizes",
+          "a consistent design system built for years of growth"
+        ],
+        "cta": "Ask about UX/UI design"
+      }
+    },
+    "closing": "I build every project from scratch and ship it with automated tests. Before anything reaches you, the code goes through quality checks, accessibility checks and testing on real phones. You get a product that works today and can grow tomorrow."
   },
   "contact": {
     "heading": "Contact",
