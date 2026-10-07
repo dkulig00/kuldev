@@ -48,6 +48,19 @@ Monorepo, two independent apps:
   config, or documentation outside a single app.
 - Do not add new dependencies without asking first.
 
+## Motion
+
+Rules for animations in `apps/web` (details: `docs/decisions/0008-motion-foundation.md`):
+
+- Only `motion` (Motion for React); no other animation or smooth-scroll libraries.
+- Import `motion/*` only in `src/components/motion/`; use `m.*`, never `motion.*`.
+- Respect `prefers-reduced-motion`: without motion the page must be complete.
+- Animate only `transform` and `opacity`.
+- Content must be visible without JavaScript; never ship a hidden state in
+  server HTML. The Hero has no entrance animation.
+- Sections stay Server Components; animated parts are small client components.
+- Add a new primitive only together with its first real use.
+
 ## Definition of done
 
 1. Tests added/updated and passing.

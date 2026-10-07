@@ -1,3 +1,4 @@
+import { MotionProvider } from '@/components/motion';
 import { getSiteUrl } from '@/config/site';
 import { bodyFont, headlineFont, monoFont } from '@/fonts';
 import { routing } from '@/i18n/routing';
@@ -53,7 +54,9 @@ export default async function LocaleLayout({
       className={`${headlineFont.variable} ${bodyFont.variable} ${monoFont.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </NextIntlClientProvider>
         {DevFeedbackOverlay && <DevFeedbackOverlay />}
       </body>
     </html>
