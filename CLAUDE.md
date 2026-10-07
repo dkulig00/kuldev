@@ -61,6 +61,12 @@ Rules for animations in `apps/web` (details: `docs/decisions/0008-motion-foundat
 - Sections stay Server Components; animated parts are small client components.
 - Add a new primitive only together with its first real use.
 
+## Planning
+
+- Before the user accepts a plan for a non-trivial change, suggest running
+  `/grill-plan` (skeptical review against ADRs and `checklist.md`).
+- New lessons from plan reviews go into `.claude/skills/grill-plan/checklist.md`.
+
 ## Definition of done
 
 1. Tests added/updated and passing.
