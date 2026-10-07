@@ -29,6 +29,10 @@ until JavaScript loads. That hurts accessibility, Core Web Vitals and the
   element, an ancestor or a descendant. Hiding and revealing both run in the
   lazily loaded feature bundle, so a slow or failed chunk leaves content
   visible.
+- A motion primitive may change an element's state only while the element is
+  off-screen: fully below the viewport, with no `location.hash` targeting the
+  element, an ancestor or a descendant. Otherwise it stays static in its end
+  state. `Reveal` and `ScrollTransform` both follow this rule.
 - The Hero has no entrance animation.
 - Animated parts are small client components in `src/components/motion/`.
   Sections stay Server Components and only wrap their content. ESLint blocks
