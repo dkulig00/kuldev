@@ -14,6 +14,32 @@ i błękit, zdjęcia ludzi, robot 3D, gwiazdki ocen i plakietki ALL CAPS. Celowo
 odcinamy: żadnego granatu ani błękitu jako akcentu, żadnych zdjęć ani 3D, żadnych liczb i ocen.
 Jedynym „obrazem” strony jest schemat przepływu.
 
+## Zmiany po przeglądzie zrzutów PR A (2026-10-08)
+
+Ta sekcja ma pierwszeństwo przed resztą planu tam, gdzie się z nią nie zgadza.
+
+- **Bez budownictwa i bez siatki.** Siatka w tle usunięta. Motyw przepływu to
+  przebieg pracy agenta AI i automatyzacji (kroki, stany), a nie rysunek
+  techniczny ani Dynamo/BIM. ADR 0009 zaktualizowany.
+- **Tło:** gładkie, sekcje oddzielone tonem (`bg` i pas `surface`), w hero
+  miękka poświata akcentu w miejscu schematu, bloki to panele `surface`
+  z promieniem 12 px.
+- **Nagłówek:** przyklejony, półprzezroczysty z rozmyciem; linki nawigacji
+  z paskiem akcentu wypełnianym przy hover i fokusie (tylko `transform`);
+  `scroll-padding-top` dla linków `#sekcja`. Na telefonach układ zawijany:
+  2 rzędy na 375 px, przycisk w 3. rzędzie na 320 px.
+- **Hero (już w PR A):** linijka „Automatyzacja, AI i oprogramowanie dla firm”,
+  nagłówek „Buduję agentów AI dla Twojej firmy.” (forma pasująca do każdej
+  frazy obiegu w PR B), nowy opis, jeden link „Zobacz usługi”; bez
+  „Wyceń projekt” (jest w nawigacji).
+- **Usługi:** 4 bloki zamiast zakładek i akordeonu, bez linków „Zapytaj o …”;
+  uniesienie bloku przy hover. **PR C odpada**, prymitywy `Tabs` i
+  `Accordion` nie powstają.
+- **Blok wyróżnika usunięty.**
+- **Nowa sekcja „O mnie”** (`#o-mnie`, pozycja w nawigacji): monogram,
+  przykładowy tekst do podmiany przez użytkownika, trzy zasady pracy.
+- **Kontakt:** przyciski obu ścieżek wyrównane do dołu kart.
+
 ## Decyzje użytkownika (2026-10-08)
 
 - Paleta **A „Sygnał OK”**. Zieleń to akcent marki, a nie kolor „sukcesu”.

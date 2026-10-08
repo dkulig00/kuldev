@@ -17,28 +17,43 @@ of people, 3D robots, star ratings and ALL-CAPS badges.
 
 ## Decision
 
-### Metaphor: workflow
+### Metaphor: an automated workflow
 
-The visual language is data moving through the steps of a system. Source:
-technical drawings and Dynamo node graphs (BIM automation is the founder's
-background): rectangular nodes, orthogonal connectors (right angles only),
-a construction grid, node labels in a technical monospace.
+The visual language is work moving through an automated system: an AI
+agent or an automation taking a request, processing it and delivering a
+result. It speaks the vocabulary of automation and AI agent tools (steps,
+states such as "processing" and "done"), not of technical drawings or
+construction.
 
-- The Hero shows one concrete, animated flow diagram ("Customer inquiry →
-  AI agent → Reply + CRM entry"). It is the only place where the design
-  takes a bold risk; everything around it stays quiet.
-- Lines and nodes appear only where something flows (Hero, the connector
-  between the active service and its panel, later "How I work"). Never as
-  frame decoration.
-- The accent means "work flows here". It is used for the primary CTA, the
-  pulse and active node, and active states. Never as decoration.
+- The Hero shows one concrete, animated workflow ("Customer inquiry → AI
+  agent → Reply + CRM entry"). It is the only place where the design takes
+  a bold risk; everything around it stays quiet.
+- Flow lines and nodes appear only where something flows (the Hero, later
+  "How I work"). Never as frame decoration.
+- The accent means "work happens here". It is used for the primary CTA, the
+  pulse and active node, a soft light behind the Hero diagram, small node
+  markers and active states. Never as decoration on its own.
+- No background grid or other blueprint and construction imagery.
 - No ALL-CAPS labels, no arrows appended to buttons, no middle-dot meta
-  strings, no pills, no shadows, no glassmorphism, no purple/blue gradients,
-  glowing brains, robots, dot-cloud "neural networks", sparkle icons, stock
-  3D. No invented numbers, ratings, testimonials or client logos.
+  strings, no pills, no shadows, no purple/blue gradients, glowing brains,
+  robots, dot-cloud "neural networks", sparkle icons, stock 3D. No invented
+  numbers, ratings, testimonials or client logos.
 - Monospace only for node labels and service numbers.
-- Radii follow hierarchy: nodes 2 px, buttons 6 px.
-- Background: a 32 px grid at ~3-4 % contrast, drawn with CSS gradients.
+
+### Layout and surfaces
+
+- Flat page background. Sections are separated by tone (`bg` and a
+  `surface` band), not by rules.
+- The Hero has one soft radial light in the accent color where the
+  workflow diagram sits, so the "working" part of the page stands out.
+- Content blocks (services, principles, contact paths) are `surface` panels
+  with a 1 px `line` border and 12 px radius. Buttons have 6 px radius.
+- The header is sticky, translucent (`bg` at 80 % with a backdrop blur) so
+  content scrolls visibly beneath it. `scroll-padding-top` keeps `#section`
+  targets below it.
+- Interaction is visible: navigation links fill an accent bar on hover and
+  focus, service blocks lift slightly on hover. Only `transform` animates
+  (ADR 0008); colors change without a transition.
 
 ### Themes
 
@@ -57,18 +72,18 @@ and nothing shifts on hydration. A custom implementation was chosen over
 Tokens live in `apps/web/src/app/globals.css` and are mapped through
 Tailwind v4 `@theme inline`. Components use token names, never raw hex.
 
-| token | dark | light | use |
-|---|---|---|---|
-| `bg` | `#16191C` | `#F4F5F2` | page background |
-| `surface` | `#1E2226` | `#FFFFFF` | nodes, panels |
-| `line` | `#2C3237` | `#D9DCD6` | grid, connectors, decorative borders |
-| `muted` | `#9BA3A9` | `#565E63` | secondary text |
-| `ink` | `#E8EAE6` | `#15181B` | primary text |
-| `accent` | `#3FB68B` | `#3FB68B` | primary button fill, pulse, active node |
-| `accent-ink` | `#0E1210` | `#0E1210` | text on `accent`, in both themes |
+| token         | dark      | light     | use                                      |
+| ------------- | --------- | --------- | ---------------------------------------- |
+| `bg`          | `#16191C` | `#F4F5F2` | page background                          |
+| `surface`     | `#1E2226` | `#FFFFFF` | nodes, panels                            |
+| `line`        | `#2C3237` | `#D9DCD6` | connectors, panel borders, dividers      |
+| `muted`       | `#9BA3A9` | `#565E63` | secondary text                           |
+| `ink`         | `#E8EAE6` | `#15181B` | primary text                             |
+| `accent`      | `#3FB68B` | `#3FB68B` | primary button fill, pulse, active node  |
+| `accent-ink`  | `#0E1210` | `#0E1210` | text on `accent`, in both themes         |
 | `accent-text` | `#3FB68B` | `#0F7A55` | accent as text, links, active tab marker |
-| `success` | `#7CB7F0` | `#1F5FA8` | success messages |
-| `danger` | `#F2706B` | `#B3261E` | error messages |
+| `success`     | `#7CB7F0` | `#1F5FA8` | success messages                         |
+| `danger`      | `#F2706B` | `#B3261E` | error messages                           |
 
 The green accent is the brand color, not a "success" color. Success and
 error states use their own tokens so they are never confused with the
@@ -77,21 +92,21 @@ they exist for future forms and are covered by the contrast test.
 
 Measured contrast (WCAG 2.1, required: text 4.5:1, UI components 3:1):
 
-| pair | dark | light |
-|---|---|---|
-| `ink` on `bg` | 14.57 | 16.29 |
-| `ink` on `surface` | 13.22 | 17.82 |
-| `muted` on `bg` | 6.90 | 6.04 |
-| `muted` on `surface` | 6.25 | 6.61 |
-| `accent-text` on `bg` | 6.95 | 4.88 |
-| `accent-text` on `surface` | 6.31 | 5.34 |
-| `accent-ink` on `accent` | 7.44 | 7.44 |
-| `success` on `bg` | 8.31 | 5.89 |
-| `success` on `surface` | 7.54 | 6.44 |
-| `danger` on `bg` | 6.14 | 5.97 |
-| `danger` on `surface` | 5.57 | 6.54 |
-| `accent` on `bg` (non-text) | 6.95 | 2.32 |
-| `line` on `bg` (decorative) | 1.36 | 1.27 |
+| pair                        | dark  | light |
+| --------------------------- | ----- | ----- |
+| `ink` on `bg`               | 14.57 | 16.29 |
+| `ink` on `surface`          | 13.22 | 17.82 |
+| `muted` on `bg`             | 6.90  | 6.04  |
+| `muted` on `surface`        | 6.25  | 6.61  |
+| `accent-text` on `bg`       | 6.95  | 4.88  |
+| `accent-text` on `surface`  | 6.31  | 5.34  |
+| `accent-ink` on `accent`    | 7.44  | 7.44  |
+| `success` on `bg`           | 8.31  | 5.89  |
+| `success` on `surface`      | 7.54  | 6.44  |
+| `danger` on `bg`            | 6.14  | 5.97  |
+| `danger` on `surface`       | 5.57  | 6.54  |
+| `accent` on `bg` (non-text) | 6.95  | 2.32  |
+| `line` on `bg` (decorative) | 1.36  | 1.27  |
 
 Rules that follow from the numbers:
 
@@ -110,8 +125,8 @@ Rules that follow from the numbers:
 Self-hosted via `next/font/local` (ADR 0005):
 
 - Archivo (variable, `wght` and `wdth` axes): headings at `font-stretch:
-  112.5%` and weight 600, body at 100 % and 400/500. A wide, steady face
-  with the character of technical signage.
+112.5%` and weight 600, body at 100 % and 400/500. A wide, confident
+  grotesque that reads as modern product software.
 - IBM Plex Mono 400/500: node labels and service numbers only.
 
 Type scale 1.25 from 16 px (16 / 20 / 25 / 31 / 39 / 49 / 61), Hero up to
@@ -122,7 +137,8 @@ about 68 characters. Spacing on an 8 px base. Everything left-aligned.
 
 Drifting back to generic "AI" visuals (blue/purple gradients, neon on black,
 SaaS card grids with shadows) or to the competitors' look makes the site
-read as a template and undermines the "engineering precision" positioning.
+read as a template and undermines the positioning as a professional AI
+and automation studio.
 Raw hex values in components or new color pairs without a contrast check
 break WCAG AA in one of the two themes. Applying the theme or `data-js`
 after hydration causes a theme flash and layout shift.
