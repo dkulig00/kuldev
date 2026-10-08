@@ -2,6 +2,7 @@ import { MotionProvider } from '@/components/motion';
 import { getSiteUrl } from '@/config/site';
 import { monoFont, sansFont } from '@/fonts';
 import { routing } from '@/i18n/routing';
+import { themeScript } from '@/lib/theme/theme-script';
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
@@ -49,10 +50,16 @@ export default async function LocaleLayout({
   const locale = await rootParams.locale();
 
   return (
+    // The inline theme script sets data-theme and data-js before React
+    // hydrates, so these attributes differ from the server HTML on purpose.
     <html
       lang={locale}
       className={`${sansFont.variable} ${monoFont.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
           <MotionProvider>{children}</MotionProvider>

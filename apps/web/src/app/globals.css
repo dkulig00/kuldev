@@ -1,26 +1,84 @@
 @import 'tailwindcss';
 
+/* Dark is the default theme (ADR 0009). */
 :root {
-  --background: #15130f;
-  --panel: #221f19;
-  --ink: #f3efe6;
-  --accent-amber: #ffb020;
-  --accent-cyan: #4fd6c4;
+  color-scheme: dark;
+  --bg: #16191c;
+  --surface: #1e2226;
+  --line: #2c3237;
+  --grid: #1b1f22;
+  --muted: #9ba3a9;
+  --grid: #1b1f22;
+  --muted: #9ba3a9;
+  --ink: #e8eae6;
+  --accent: #3fb68b;
+  --accent-ink: #0e1210;
+  --accent-text: #3fb68b;
+  --success: #7cb7f0;
+  --danger: #f2706b;
+}
+
+/* Light theme from the system setting, unless the user chose dark. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --bg: #f4f5f2;
+    --surface: #ffffff;
+    --line: #d9dcd6;
+    --grid: #e9ebe6;
+    --muted: #565e63;
+    --ink: #15181b;
+    --accent: #3fb68b;
+    --accent-ink: #0e1210;
+    --accent-text: #0f7a55;
+    --success: #1f5fa8;
+    --danger: #b3261e;
+  }
+}
+
+/* Light theme chosen with the toggle. Must match the block above. */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f4f5f2;
+  --surface: #ffffff;
+  --line: #d9dcd6;
+  --grid: #e9ebe6;
+  --muted: #565e63;
+  --ink: #15181b;
+  --accent: #3fb68b;
+  --accent-ink: #0e1210;
+  --accent-text: #0f7a55;
+  --success: #1f5fa8;
+  --danger: #b3261e;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-panel: var(--panel);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
   --color-ink: var(--ink);
-  --color-accent-amber: var(--accent-amber);
-  --color-accent-cyan: var(--accent-cyan);
-  --font-display: var(--font-archivo);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
   --font-sans: var(--font-archivo);
   --font-mono: var(--font-plex-mono);
 }
 
+@utility font-heading {
+  font-family: var(--font-archivo);
+  font-stretch: 112.5%;
+  font-weight: 600;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
   color: var(--ink);
   font-family: var(--font-sans);
 }
