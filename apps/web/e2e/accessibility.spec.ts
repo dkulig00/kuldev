@@ -26,7 +26,11 @@ test.describe('theme chosen with the toggle', () => {
     page,
   }) => {
     await page.goto('/pl');
-    await page.getByRole('button', { name: 'Ciemny motyw' }).click();
+
+    const toggle = page.getByRole('button', { name: 'Ciemny motyw' });
+    // aria-pressed appears only after hydration, when clicks are handled.
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    await toggle.click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 
     const results = await new AxeBuilder({ page })
