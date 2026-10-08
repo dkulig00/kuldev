@@ -34,7 +34,7 @@
         "features": [
           "one app for both Android and iPhone",
           "connected to your systems and data",
-          "designed for touch, not squeezed down from a website"
+          "designed for touch"
         ],
         "cta": "Ask about mobile apps"
       },
@@ -42,7 +42,7 @@
         "title": "Automations and AI agents",
         "description": "Software that takes over repetitive work: reports, documents, handling enquiries, moving data between systems.",
         "features": [
-          "finding where your team loses the most time",
+          "finding where the team loses the most time",
           "AI agents that answer customer questions or work with your company documents",
           "integrations with the tools you already use"
         ],
@@ -54,7 +54,7 @@
         "features": [
           "wireframes and visual design that fit your brand",
           "testing on real screen sizes",
-          "a consistent design system built for years of growth"
+          "a consistent design system that lasts for years"
         ],
         "cta": "Ask about UX/UI design"
       }

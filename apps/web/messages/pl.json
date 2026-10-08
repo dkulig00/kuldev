@@ -34,7 +34,7 @@
         "features": [
           "jedna aplikacja na Androida i iPhone'a",
           "połączona z Twoimi systemami i danymi",
-          "zaprojektowana pod dotyk, a nie przeniesiona ze strony"
+          "zaprojektowana pod dotyk"
         ],
         "cta": "Zapytaj o aplikacje mobilne"
       },
@@ -42,8 +42,8 @@
         "title": "Automatyzacje i agenci AI",
         "description": "Oprogramowanie, które przejmuje powtarzalną pracę: raporty, dokumenty, obsługę zapytań, przepływ danych między systemami.",
         "features": [
-          "analiza, gdzie Twój zespół traci najwięcej czasu",
-          "agenci AI odpowiadający na pytania klientów albo pracujący na firmowych dokumentach",
+          "analiza, gdzie zespół traci najwięcej czasu",
+          "agenci AI odpowiadający na pytania klientów lub pracujący na firmowych dokumentach",
           "integracje z narzędziami, których już używasz"
         ],
         "cta": "Zapytaj o automatyzacje i agentów AI"
@@ -52,9 +52,9 @@
         "title": "Projektowanie UX/UI",
         "description": "Projekt interfejsu, zanim powstanie kod: jak klient ma się poruszać po stronie lub aplikacji, żeby szybko zrobić to, po co przyszedł.",
         "features": [
-          "makiety i projekt wizualny dopasowany do Twojej marki",
+          "makiety i projekt wizualny dopasowany do marki",
           "testy na prawdziwych rozmiarach ekranów",
-          "spójny system wyglądu na lata rozwoju"
+          "spójny system wyglądu na lata"
         ],
         "cta": "Zapytaj o projekt UX/UI"
       }
