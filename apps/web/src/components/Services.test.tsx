@@ -8,19 +8,18 @@ const services = Object.entries(pl.services.items).map(([id, item]) => ({
   title: item.title,
   description: item.description,
   features: item.features,
-  ctaLabel: item.cta,
 }));
 
 function renderServices() {
-  return render(
-    <Services
-      heading={pl.services.heading}
-      services={services}
-      closing={pl.services.closing}
-      ctaLabel={pl.hero.cta}
-      ctaHref="#kontakt"
-    />,
-  );
+  return render(<Services heading={pl.services.heading} services={services} />);
+}
+
+function serviceBlocks() {
+  const heading = screen.getByRole('heading', { level: 2, name: 'Usługi' });
+
+  return within(heading.parentElement as HTMLElement)
+    .getAllByRole('listitem')
+    .filter((item) => item.parentElement?.previousElementSibling === heading);
 }
 
 describe('Services', () => {
@@ -35,18 +34,15 @@ describe('Services', () => {
     );
   });
 
-  it('renders every service with its title, description and three features', () => {
+  it('renders every service as a block with title, description and features', () => {
     renderServices();
 
-    const items = screen
-      .getByRole('heading', { level: 2, name: 'Usługi' })
-      .parentElement?.querySelectorAll(':scope > ul > li');
+    const blocks = serviceBlocks();
+    expect(blocks).toHaveLength(4);
 
-    expect(items).toHaveLength(4);
-
-    items?.forEach((item, index) => {
+    blocks.forEach((block, index) => {
       const service = services[index];
-      const scope = within(item as HTMLElement);
+      const scope = within(block);
 
       expect(
         scope.getByRole('heading', { level: 3, name: service.title }),
@@ -66,31 +62,9 @@ describe('Services', () => {
     });
   });
 
-  it('links every service to #kontakt with a distinct, descriptive label', () => {
+  it('has no links inside the service blocks', () => {
     renderServices();
 
-    const labels = services.map((service) => service.ctaLabel);
-
-    expect(new Set(labels).size).toBe(labels.length);
-    labels.forEach((label) => {
-      expect(screen.getByRole('link', { name: label })).toHaveAttribute(
-        'href',
-        '#kontakt',
-      );
-    });
-  });
-
-  it('renders the closing statement', () => {
-    renderServices();
-
-    expect(screen.getByText(pl.services.closing)).toBeInTheDocument();
-  });
-
-  it('links the closing statement to #kontakt with a quote CTA', () => {
-    renderServices();
-
-    const cta = screen.getAllByRole('link', { name: pl.hero.cta });
-    expect(cta).toHaveLength(1);
-    expect(cta[0]).toHaveAttribute('href', '#kontakt');
+    expect(screen.queryAllByRole('link')).toHaveLength(0);
   });
 });

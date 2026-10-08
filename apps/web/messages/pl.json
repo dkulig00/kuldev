@@ -5,15 +5,18 @@
   },
   "nav": {
     "uslugi": "Usługi",
+    "oMnie": "O mnie",
     "kontakt": "Kontakt"
   },
   "theme": {
     "dark": "Ciemny motyw"
   },
   "hero": {
-    "title": "Automatyzacje. AI first",
-    "subtitle": "Projektuję i wdrażam produkty cyfrowe dla firm, które chcą wyglądać i działać inaczej niż konkurencja.",
-    "cta": "Wyceń projekt"
+    "eyebrow": "Automatyzacja, AI i oprogramowanie dla firm",
+    "title": "Buduję agentów AI dla Twojej firmy.",
+    "subtitle": "Systemy, które same odpowiadają na zapytania, przygotowują dokumenty i przenoszą dane między programami. Twój zespół odzyskuje czas na to, co naprawdę ważne.",
+    "cta": "Wyceń projekt",
+    "servicesCta": "Zobacz usługi"
   },
   "services": {
     "heading": "Usługi",
@@ -25,8 +28,7 @@
           "szybkie na telefonie i komputerze, przyjazne wyszukiwarkom",
           "dostępne dla każdego użytkownika (standard WCAG)",
           "optymalizacja istniejących stron: szybkość, SEO, wygoda"
-        ],
-        "cta": "Zapytaj o strony i aplikacje"
+        ]
       },
       "mobile": {
         "title": "Aplikacje mobilne",
@@ -35,8 +37,7 @@
           "jedna aplikacja na Androida i iPhone'a",
           "połączona z Twoimi systemami i danymi",
           "zaprojektowana pod dotyk"
-        ],
-        "cta": "Zapytaj o aplikacje mobilne"
+        ]
       },
       "automation": {
         "title": "Automatyzacje i agenci AI",
@@ -45,8 +46,7 @@
           "analiza, gdzie zespół traci najwięcej czasu",
           "agenci AI odpowiadający na pytania klientów lub pracujący na firmowych dokumentach",
           "integracje z narzędziami, których już używasz"
-        ],
-        "cta": "Zapytaj o automatyzacje i agentów AI"
+        ]
       },
       "design": {
         "title": "Projektowanie UX/UI",
@@ -55,11 +55,34 @@
           "makiety i projekt wizualny dopasowany do marki",
           "testy na prawdziwych rozmiarach ekranów",
           "spójny system wyglądu na lata"
-        ],
-        "cta": "Zapytaj o projekt UX/UI"
+        ]
       }
-    },
-    "closing": "Każdy projekt buduję od zera i dostarczam z testami automatycznymi. Zanim cokolwiek trafi do Ciebie, kod przechodzi kontrolę jakości, sprawdzenie dostępności i testy na telefonach. Dostajesz produkt, który działa dziś i da się rozwijać jutro."
+    }
+  },
+  "about": {
+    "heading": "O mnie",
+    "name": "Dariusz Kulig",
+    "role": "Założyciel kuldev. Projektuję i programuję.",
+    "paragraphs": [
+      "Tworzę oprogramowanie dla firm od pomysłu do wdrożenia: projektuję interfejs, piszę kod i pilnuję, żeby całość działała szybko i bez błędów.",
+      "Najbardziej lubię projekty, w których technologia zdejmuje z ludzi powtarzalną pracę. Zanim cokolwiek zbuduję, sprawdzam, gdzie Twój zespół traci najwięcej czasu, i od tego zaczynam.",
+      "Pracujesz bezpośrednio ze mną, bez pośredników, więc zawsze wiesz, kto odpowiada za Twój projekt."
+    ],
+    "principlesLabel": "Jak pracuję",
+    "principles": [
+      {
+        "title": "Kod z testami",
+        "description": "Każda funkcja ma testy automatyczne, więc zmiany nie psują tego, co już działa."
+      },
+      {
+        "title": "Dostępność i szybkość",
+        "description": "Strony i aplikacje działają sprawnie na każdym telefonie i dla każdego użytkownika."
+      },
+      {
+        "title": "Jasna komunikacja",
+        "description": "Regularnie pokazuję postępy i mówię wprost, co jest gotowe, a co jeszcze nie."
+      }
+    ]
   },
   "contact": {
     "heading": "Porozmawiajmy o Twoim projekcie",

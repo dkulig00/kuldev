@@ -1,3 +1,4 @@
+import { About } from '@/components/About';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
@@ -24,7 +25,6 @@ export default async function HomePage() {
     title: t(`services.items.${id}.title`),
     description: t(`services.items.${id}.description`),
     features: t.raw(`services.items.${id}.features`) as string[],
-    ctaLabel: t(`services.items.${id}.cta`),
   }));
 
   const contactPaths = [
@@ -60,17 +60,25 @@ export default async function HomePage() {
       />
       <main className="flex-1">
         <Hero
+          eyebrow={t('hero.eyebrow')}
           title={t('hero.title')}
           subtitle={t('hero.subtitle')}
-          ctaLabel={t('hero.cta')}
-          ctaHref="#kontakt"
+          servicesLabel={t('hero.servicesCta')}
+          servicesHref="#uslugi"
         />
-        <Services
-          heading={t('services.heading')}
-          services={services}
-          closing={t('services.closing')}
-          ctaLabel={t('hero.cta')}
-          ctaHref="#kontakt"
+        <Services heading={t('services.heading')} services={services} />
+        <About
+          heading={t('about.heading')}
+          name={t('about.name')}
+          role={t('about.role')}
+          paragraphs={t.raw('about.paragraphs') as string[]}
+          principlesLabel={t('about.principlesLabel')}
+          principles={
+            t.raw('about.principles') as {
+              title: string;
+              description: string;
+            }[]
+          }
         />
         <Contact
           heading={t('contact.heading')}
