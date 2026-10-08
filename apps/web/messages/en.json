@@ -62,8 +62,29 @@
     "closing": "I build every project from scratch and ship it with automated tests. Before anything reaches you, the code goes through quality checks, accessibility checks and testing on real phones. You get a product that works today and can grow tomorrow."
   },
   "contact": {
-    "heading": "Contact",
-    "body": "Describe your project and I'll get back to you with a concrete proposal within 1-2 business days.",
-    "emailLabel": "Send an email"
+    "heading": "Let's talk about your project",
+    "body": "Choose how you want to start. I reply within 1 to 2 business days with a concrete proposal.",
+    "paths": {
+      "short": {
+        "title": "Short message",
+        "description": "A few sentences about what you need. We'll work out the rest in a call.",
+        "cta": "Write a short message",
+        "subject": "Inquiry from kuldev.pl"
+      },
+      "brief": {
+        "title": "Full brief",
+        "description": "An email with ready questions about goals, scope, timeline and budget, so the estimate is more accurate.",
+        "cta": "Send a full brief",
+        "subject": "Project brief",
+        "questions": [
+          "Company and industry:",
+          "What you want to achieve:",
+          "What you need (website, app, automation, UX/UI design):",
+          "Timeline:",
+          "Budget (approximate):",
+          "Links (current site, examples):"
+        ]
+      }
+    }
   }
 }

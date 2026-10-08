@@ -62,8 +62,29 @@
     "closing": "Każdy projekt buduję od zera i dostarczam z testami automatycznymi. Zanim cokolwiek trafi do Ciebie, kod przechodzi kontrolę jakości, sprawdzenie dostępności i testy na telefonach. Dostajesz produkt, który działa dziś i da się rozwijać jutro."
   },
   "contact": {
-    "heading": "Kontakt",
-    "body": "Opisz swój projekt, odpowiem z konkretną propozycją w 1-2 dni roboczych.",
-    "emailLabel": "Napisz e-mail"
+    "heading": "Porozmawiajmy o Twoim projekcie",
+    "body": "Wybierz, jak chcesz zacząć. Odpowiadam w ciągu 1 do 2 dni roboczych z konkretną propozycją.",
+    "paths": {
+      "short": {
+        "title": "Krótka wiadomość",
+        "description": "Kilka zdań o tym, czego potrzebujesz. Resztę ustalimy w rozmowie.",
+        "cta": "Napisz krótką wiadomość",
+        "subject": "Zapytanie ze strony kuldev.pl"
+      },
+      "brief": {
+        "title": "Pełny brief",
+        "description": "E-mail z gotowymi pytaniami o cel, zakres, termin i budżet. Dzięki temu wycena będzie dokładniejsza.",
+        "cta": "Wyślij pełny brief",
+        "subject": "Brief projektu",
+        "questions": [
+          "Firma i branża:",
+          "Co chcesz osiągnąć:",
+          "Czego potrzebujesz (strona, aplikacja, automatyzacja, projekt UX/UI):",
+          "Termin:",
+          "Budżet (orientacyjnie):",
+          "Linki (obecna strona, przykłady):"
+        ]
+      }
+    }
   }
 }

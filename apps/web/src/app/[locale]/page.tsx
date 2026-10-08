@@ -6,6 +6,7 @@ import { Services } from '@/components/Services';
 import { CONTACT_EMAIL } from '@/config/contact';
 import { navigationItems } from '@/config/navigation';
 import { FADER_LEVEL, serviceIds } from '@/config/services';
+import { mailtoHref } from '@/lib/mailto';
 import { getTranslations } from 'next-intl/server';
 import * as rootParams from 'next/root-params';
 
@@ -25,6 +26,28 @@ export default async function HomePage() {
     features: t.raw(`services.items.${id}.features`) as string[],
     ctaLabel: t(`services.items.${id}.cta`),
   }));
+
+  const contactPaths = [
+    {
+      id: 'short',
+      title: t('contact.paths.short.title'),
+      description: t('contact.paths.short.description'),
+      ctaLabel: t('contact.paths.short.cta'),
+      href: mailtoHref(CONTACT_EMAIL, {
+        subject: t('contact.paths.short.subject'),
+      }),
+    },
+    {
+      id: 'brief',
+      title: t('contact.paths.brief.title'),
+      description: t('contact.paths.brief.description'),
+      ctaLabel: t('contact.paths.brief.cta'),
+      href: mailtoHref(CONTACT_EMAIL, {
+        subject: t('contact.paths.brief.subject'),
+        body: (t.raw('contact.paths.brief.questions') as string[]).join('\n\n'),
+      }),
+    },
+  ];
 
   return (
     <>
@@ -52,8 +75,7 @@ export default async function HomePage() {
         <Contact
           heading={t('contact.heading')}
           body={t('contact.body')}
-          email={CONTACT_EMAIL}
-          emailLabel={t('contact.emailLabel')}
+          paths={contactPaths}
         />
       </main>
       <Footer />
