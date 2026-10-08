@@ -12,7 +12,7 @@ export function StatusMessage({
 
   return (
     <output
-      className={`bg-panel border-ink/20 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium shadow ${
+      className={`bg-surface border-ink/20 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium shadow ${
         isSuccess ? 'text-green-700' : 'text-red-700'
       }`}
     >
