@@ -21,7 +21,7 @@ export function LanguageSwitcher({
         'src/components/LanguageSwitcher.tsx',
       )}
       aria-label="Language switcher"
-      className="flex gap-2"
+      className="flex"
     >
       {routing.locales.map((locale) => {
         const isActive = locale === currentLocale;
@@ -32,9 +32,11 @@ export function LanguageSwitcher({
             href="/"
             locale={locale}
             aria-current={isActive ? 'page' : undefined}
-            className={
-              isActive ? 'text-ink font-semibold' : 'text-ink/60 hover:text-ink'
-            }
+            className={`focus-visible:outline-accent-text inline-flex min-h-11 min-w-9 items-center justify-center text-sm font-medium focus-visible:outline-2 focus-visible:-outline-offset-2 ${
+              isActive
+                ? 'text-ink decoration-accent-text underline decoration-2 underline-offset-6'
+                : 'text-muted hover:text-ink'
+            }`}
           >
             {localeLabels[locale]}
           </Link>

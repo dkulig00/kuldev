@@ -7,6 +7,9 @@
     "uslugi": "Usługi",
     "kontakt": "Kontakt"
   },
+  "theme": {
+    "dark": "Ciemny motyw"
+  },
   "hero": {
     "title": "Automatyzacje. AI first",
     "subtitle": "Projektuję i wdrażam produkty cyfrowe dla firm, które chcą wyglądać i działać inaczej niż konkurencja.",

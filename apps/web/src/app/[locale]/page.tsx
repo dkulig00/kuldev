@@ -33,6 +33,7 @@ export default async function HomePage() {
         ctaLabel={t('hero.cta')}
         ctaHref="#kontakt"
         currentLocale={locale}
+        themeLabel={t('theme.dark')}
       />
       <main className="flex-1">
         <Hero
