@@ -25,7 +25,6 @@ export function Contact({ heading, body, paths }: Readonly<ContactProps>) {
       {...devComponentProps('Contact', 'src/components/Contact.tsx')}
       id="kontakt"
       aria-labelledby="kontakt-heading"
-      className="border-line border-t"
     >
       <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
         <Reveal>
@@ -41,17 +40,17 @@ export function Contact({ heading, body, paths }: Readonly<ContactProps>) {
             {paths.map((path, index) => (
               <li
                 key={path.id}
-                className="bg-surface border-line flex flex-col rounded-sm border p-6 sm:p-8"
+                className="bg-surface border-line flex flex-col rounded-xl border p-6 sm:p-8"
               >
                 <h3 className="font-heading text-ink text-xl sm:text-2xl">
                   {path.title}
                 </h3>
-                <p className="text-muted mt-3 max-w-prose">
+                <p className="text-muted mt-3 mb-8 max-w-prose leading-relaxed">
                   {path.description}
                 </p>
                 <a
                   href={path.href}
-                  className={`${index === 0 ? primaryAction : secondaryAction} focus-visible:outline-accent-text mt-8 inline-flex min-h-11 items-center self-start rounded-md border px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2`}
+                  className={`${index === 0 ? primaryAction : secondaryAction} focus-visible:outline-accent-text mt-auto inline-flex min-h-11 items-center self-start rounded-md border px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2`}
                 >
                   {path.ctaLabel}
                 </a>
