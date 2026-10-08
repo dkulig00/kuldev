@@ -70,7 +70,7 @@ const themes = {
 function adrValue(foreground: string, background: string, theme: string) {
   const row = adr.match(
     new RegExp(
-      `\\| \`${foreground}\` on \`${background}\`[^|]*\\| ([\\d.]+) \\| ([\\d.]+) \\|`,
+      `\\| \`${foreground}\` on \`${background}\`[^|]*\\|\\s*([\\d.]+)\\s*\\|\\s*([\\d.]+)\\s*\\|`,
     ),
   );
 
