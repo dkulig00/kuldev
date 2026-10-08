@@ -78,7 +78,7 @@ export default async function HomePage() {
           paths={contactPaths}
         />
       </main>
-      <Footer />
+      <Footer navItems={navItems} email={CONTACT_EMAIL} />
     </>
   );
 }
