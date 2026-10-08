@@ -56,7 +56,7 @@ Stop, tell the user why, and mark the item `needs-info` when:
   A direction ("too small", "more space") or a target ("make it blue") is
   enough: pick one step on the Tailwind scale and show it in the proposal.
 - The target is outside the design system: use only the theme tokens from
-  `apps/web/src/app/globals.css` (see `docs/decisions/0002-visual-direction-studio.md`),
+  `apps/web/src/app/globals.css` (see `docs/decisions/0009-visual-direction-workflow.md`),
   never raw hex values. If no token matches (e.g. "blue"), propose the closest
   one and ask.
 - A reported bug ("broken on mobile") cannot be reproduced with the Playwright

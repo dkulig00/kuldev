@@ -5,8 +5,8 @@ Status: accepted
 
 ## Context
 
-The "Studio" direction (ADR 0002) calls for a site with character, and motion
-is part of that. Without shared rules, each component would add its own
+The visual direction (ADR 0009, previously ADR 0002) calls for a site with
+character, and motion is part of that. Without shared rules, each component would add its own
 effects: scattered fade-ups, animated layout properties, and content hidden
 until JavaScript loads. That hurts accessibility, Core Web Vitals and the
 "not a template" positioning.
