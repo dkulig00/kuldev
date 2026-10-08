@@ -14,8 +14,8 @@
   --color-ink: var(--ink);
   --color-accent-amber: var(--accent-amber);
   --color-accent-cyan: var(--accent-cyan);
-  --font-display: var(--font-big-shoulders);
-  --font-sans: var(--font-plex-sans);
+  --font-display: var(--font-archivo);
+  --font-sans: var(--font-archivo);
   --font-mono: var(--font-plex-mono);
 }
 

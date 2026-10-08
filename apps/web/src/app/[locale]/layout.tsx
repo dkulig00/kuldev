@@ -1,6 +1,6 @@
 import { MotionProvider } from '@/components/motion';
 import { getSiteUrl } from '@/config/site';
-import { bodyFont, headlineFont, monoFont } from '@/fonts';
+import { monoFont, sansFont } from '@/fonts';
 import { routing } from '@/i18n/routing';
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
@@ -51,7 +51,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${headlineFont.variable} ${bodyFont.variable} ${monoFont.variable} h-full antialiased`}
+      className={`${sansFont.variable} ${monoFont.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>

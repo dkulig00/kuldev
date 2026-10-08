@@ -5,8 +5,7 @@ vi.mock('next/root-params', () => ({
 }));
 
 vi.mock('@/fonts', () => ({
-  headlineFont: { variable: '--font-big-shoulders' },
-  bodyFont: { variable: '--font-plex-sans' },
+  sansFont: { variable: '--font-archivo' },
   monoFont: { variable: '--font-plex-mono' },
 }));
 
