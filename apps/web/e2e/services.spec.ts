@@ -18,7 +18,9 @@ for (const locale of ['pl', 'en'] as const) {
       );
       expect(scrollWidth).toBeLessThanOrEqual(viewportWidth);
 
-      const blocks = page.locator('#uslugi > ul > li, #uslugi > div');
+      const blocks = page.locator(
+        '#uslugi h2 + ul > li, #uslugi h2 + ul + div',
+      );
       await expect(blocks).toHaveCount(5);
 
       for (const block of await blocks.all()) {
@@ -44,14 +46,13 @@ for (const locale of ['pl', 'en'] as const) {
       ).toBeInViewport();
     });
 
-    test('has no WCAG 2.1 AA violations with a highlighted channel', async ({
+    test('has no WCAG 2.1 AA violations with a focused link', async ({
       page,
     }) => {
       await page.goto(`/${locale}#uslugi`);
 
-      const channels = page.locator('#uslugi > ul > li');
-      await channels.nth(0).hover();
-      await channels.nth(1).getByRole('link').focus();
+      const services = page.locator('#uslugi h2 + ul > li');
+      await services.nth(1).getByRole('link').focus();
 
       const results = await new AxeBuilder({ page })
         .include('#uslugi')

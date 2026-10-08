@@ -34,17 +34,9 @@ for (const locale of ['pl', 'en']) {
       expect(await visualState(reveal)).toEqual(fullyVisible);
     });
 
-    test('services content is visible and faders stay static', async ({
-      page,
-    }) => {
+    test('services content is visible', async ({ page }) => {
       await page.goto(`/${locale}`);
       await page.waitForLoadState('networkidle');
-
-      const faders = page.locator('#uslugi [data-scroll]');
-      await expect(faders).toHaveCount(8);
-      for (const fader of await faders.all()) {
-        await expect(fader).toHaveAttribute('data-scroll', 'static');
-      }
 
       for (const text of await servicesText(page)) {
         await text.scrollIntoViewIfNeeded();

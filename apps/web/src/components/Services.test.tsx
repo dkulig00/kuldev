@@ -1,10 +1,9 @@
 import { cleanup, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import pl from '../../messages/pl.json';
-import { MotionProvider } from './motion';
 import { Services } from './Services';
 
-const channels = Object.entries(pl.services.items).map(([id, item]) => ({
+const services = Object.entries(pl.services.items).map(([id, item]) => ({
   id,
   title: item.title,
   description: item.description,
@@ -14,15 +13,13 @@ const channels = Object.entries(pl.services.items).map(([id, item]) => ({
 
 function renderServices() {
   return render(
-    <MotionProvider>
-      <Services
-        heading={pl.services.heading}
-        channels={channels}
-        closing={pl.services.closing}
-        ctaHref="#kontakt"
-        level={0.75}
-      />
-    </MotionProvider>,
+    <Services
+      heading={pl.services.heading}
+      services={services}
+      closing={pl.services.closing}
+      ctaLabel={pl.hero.cta}
+      ctaHref="#kontakt"
+    />,
   );
 }
 
@@ -38,7 +35,7 @@ describe('Services', () => {
     );
   });
 
-  it('renders every channel with its title, description and three features', () => {
+  it('renders every service with its title, description and three features', () => {
     renderServices();
 
     const items = screen
@@ -48,20 +45,20 @@ describe('Services', () => {
     expect(items).toHaveLength(4);
 
     items?.forEach((item, index) => {
-      const channel = channels[index];
+      const service = services[index];
       const scope = within(item as HTMLElement);
 
       expect(
-        scope.getByRole('heading', { level: 3, name: channel.title }),
+        scope.getByRole('heading', { level: 3, name: service.title }),
       ).toBeInTheDocument();
-      expect(scope.getByText(channel.description)).toBeInTheDocument();
-      channel.features.forEach((feature) => {
+      expect(scope.getByText(service.description)).toBeInTheDocument();
+      service.features.forEach((feature) => {
         expect(scope.getByText(feature)).toBeInTheDocument();
       });
     });
   });
 
-  it('numbers channels 01 to 04 and hides the numbers from screen readers', () => {
+  it('numbers services 01 to 04 and hides the numbers from screen readers', () => {
     renderServices();
 
     ['01', '02', '03', '04'].forEach((number) => {
@@ -69,10 +66,10 @@ describe('Services', () => {
     });
   });
 
-  it('links every channel to #kontakt with a distinct, descriptive label', () => {
+  it('links every service to #kontakt with a distinct, descriptive label', () => {
     renderServices();
 
-    const labels = channels.map((channel) => channel.ctaLabel);
+    const labels = services.map((service) => service.ctaLabel);
 
     expect(new Set(labels).size).toBe(labels.length);
     labels.forEach((label) => {
@@ -89,12 +86,11 @@ describe('Services', () => {
     expect(screen.getByText(pl.services.closing)).toBeInTheDocument();
   });
 
-  it('gives every channel a decorative fader track', () => {
-    const { container } = renderServices();
+  it('links the closing statement to #kontakt with a quote CTA', () => {
+    renderServices();
 
-    expect(container.querySelectorAll('[data-scroll]')).toHaveLength(8);
-    container.querySelectorAll('[data-scroll]').forEach((element) => {
-      expect(element.closest('[aria-hidden="true"]')).not.toBeNull();
-    });
+    const cta = screen.getAllByRole('link', { name: pl.hero.cta });
+    expect(cta).toHaveLength(1);
+    expect(cta[0]).toHaveAttribute('href', '#kontakt');
   });
 });

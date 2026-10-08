@@ -32,7 +32,7 @@ until JavaScript loads. That hurts accessibility, Core Web Vitals and the
 - A motion primitive may change an element's state only while the element is
   off-screen: fully below the viewport, with no `location.hash` targeting the
   element, an ancestor or a descendant. Otherwise it stays static in its end
-  state. `Reveal` and `ScrollTransform` both follow this rule.
+  state. `Reveal` follows this rule.
 - The Hero has no entrance animation.
 - Animated parts are small client components in `src/components/motion/`.
   Sections stay Server Components and only wrap their content. ESLint blocks

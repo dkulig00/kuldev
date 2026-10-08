@@ -5,7 +5,7 @@ import { Hero } from '@/components/Hero';
 import { Services } from '@/components/Services';
 import { CONTACT_EMAIL } from '@/config/contact';
 import { navigationItems } from '@/config/navigation';
-import { FADER_LEVEL, serviceIds } from '@/config/services';
+import { serviceIds } from '@/config/services';
 import { mailtoHref } from '@/lib/mailto';
 import { getTranslations } from 'next-intl/server';
 import * as rootParams from 'next/root-params';
@@ -19,7 +19,7 @@ export default async function HomePage() {
     label: t(item.labelKey as Parameters<typeof t>[0]),
   }));
 
-  const serviceChannels = serviceIds.map((id) => ({
+  const services = serviceIds.map((id) => ({
     id,
     title: t(`services.items.${id}.title`),
     description: t(`services.items.${id}.description`),
@@ -67,10 +67,10 @@ export default async function HomePage() {
         />
         <Services
           heading={t('services.heading')}
-          channels={serviceChannels}
+          services={services}
           closing={t('services.closing')}
+          ctaLabel={t('hero.cta')}
           ctaHref="#kontakt"
-          level={FADER_LEVEL}
         />
         <Contact
           heading={t('contact.heading')}
