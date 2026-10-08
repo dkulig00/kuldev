@@ -5,12 +5,18 @@
   },
   "nav": {
     "uslugi": "Usługi",
+    "oMnie": "O mnie",
     "kontakt": "Kontakt"
   },
+  "theme": {
+    "dark": "Ciemny motyw"
+  },
   "hero": {
-    "title": "Automatyzacje. AI first",
-    "subtitle": "Projektuję i wdrażam produkty cyfrowe dla firm, które chcą wyglądać i działać inaczej niż konkurencja.",
-    "cta": "Wyceń projekt"
+    "eyebrow": "Automatyzacja, AI i oprogramowanie dla firm",
+    "title": "Buduję agentów AI dla Twojej firmy.",
+    "subtitle": "Systemy, które same odpowiadają na zapytania, przygotowują dokumenty i przenoszą dane między programami. Twój zespół odzyskuje czas na to, co naprawdę ważne.",
+    "cta": "Wyceń projekt",
+    "servicesCta": "Zobacz usługi"
   },
   "services": {
     "heading": "Usługi",
@@ -22,8 +28,7 @@
           "szybkie na telefonie i komputerze, przyjazne wyszukiwarkom",
           "dostępne dla każdego użytkownika (standard WCAG)",
           "optymalizacja istniejących stron: szybkość, SEO, wygoda"
-        ],
-        "cta": "Zapytaj o strony i aplikacje"
+        ]
       },
       "mobile": {
         "title": "Aplikacje mobilne",
@@ -31,36 +36,78 @@
         "features": [
           "jedna aplikacja na Androida i iPhone'a",
           "połączona z Twoimi systemami i danymi",
-          "zaprojektowana pod dotyk, a nie przeniesiona ze strony"
-        ],
-        "cta": "Zapytaj o aplikacje mobilne"
+          "zaprojektowana pod dotyk"
+        ]
       },
       "automation": {
         "title": "Automatyzacje i agenci AI",
         "description": "Oprogramowanie, które przejmuje powtarzalną pracę: raporty, dokumenty, obsługę zapytań, przepływ danych między systemami.",
         "features": [
-          "analiza, gdzie Twój zespół traci najwięcej czasu",
-          "agenci AI odpowiadający na pytania klientów albo pracujący na firmowych dokumentach",
+          "analiza, gdzie zespół traci najwięcej czasu",
+          "agenci AI odpowiadający na pytania klientów lub pracujący na firmowych dokumentach",
           "integracje z narzędziami, których już używasz"
-        ],
-        "cta": "Zapytaj o automatyzacje i agentów AI"
+        ]
       },
       "design": {
         "title": "Projektowanie UX/UI",
         "description": "Projekt interfejsu, zanim powstanie kod: jak klient ma się poruszać po stronie lub aplikacji, żeby szybko zrobić to, po co przyszedł.",
         "features": [
-          "makiety i projekt wizualny dopasowany do Twojej marki",
+          "makiety i projekt wizualny dopasowany do marki",
           "testy na prawdziwych rozmiarach ekranów",
-          "spójny system wyglądu na lata rozwoju"
-        ],
-        "cta": "Zapytaj o projekt UX/UI"
+          "spójny system wyglądu na lata"
+        ]
       }
-    },
-    "closing": "Każdy projekt buduję od zera i dostarczam z testami automatycznymi. Zanim cokolwiek trafi do Ciebie, kod przechodzi kontrolę jakości, sprawdzenie dostępności i testy na telefonach. Dostajesz produkt, który działa dziś i da się rozwijać jutro."
+    }
+  },
+  "about": {
+    "heading": "O mnie",
+    "name": "Dariusz Kulig",
+    "role": "Założyciel kuldev. Projektuję i programuję.",
+    "paragraphs": [
+      "Tworzę oprogramowanie dla firm od pomysłu do wdrożenia: projektuję interfejs, piszę kod i pilnuję, żeby całość działała szybko i bez błędów.",
+      "Najbardziej lubię projekty, w których technologia zdejmuje z ludzi powtarzalną pracę. Zanim cokolwiek zbuduję, sprawdzam, gdzie Twój zespół traci najwięcej czasu, i od tego zaczynam.",
+      "Pracujesz bezpośrednio ze mną, bez pośredników, więc zawsze wiesz, kto odpowiada za Twój projekt."
+    ],
+    "principlesLabel": "Jak pracuję",
+    "principles": [
+      {
+        "title": "Kod z testami",
+        "description": "Każda funkcja ma testy automatyczne, więc zmiany nie psują tego, co już działa."
+      },
+      {
+        "title": "Dostępność i szybkość",
+        "description": "Strony i aplikacje działają sprawnie na każdym telefonie i dla każdego użytkownika."
+      },
+      {
+        "title": "Jasna komunikacja",
+        "description": "Regularnie pokazuję postępy i mówię wprost, co jest gotowe, a co jeszcze nie."
+      }
+    ]
   },
   "contact": {
-    "heading": "Kontakt",
-    "body": "Opisz swój projekt, odpowiem z konkretną propozycją w 1-2 dni roboczych.",
-    "emailLabel": "Napisz e-mail"
+    "heading": "Porozmawiajmy o Twoim projekcie",
+    "body": "Wybierz, jak chcesz zacząć. Odpowiadam w ciągu 12 godzin z konkretną propozycją.",
+    "paths": {
+      "short": {
+        "title": "Krótka wiadomość",
+        "description": "Kilka zdań o tym, czego potrzebujesz. Resztę ustalimy w rozmowie.",
+        "cta": "Napisz krótką wiadomość",
+        "subject": "Zapytanie ze strony kuldev.pl"
+      },
+      "brief": {
+        "title": "Pełny brief",
+        "description": "E-mail z gotowymi pytaniami o cel, zakres, termin i budżet. Dzięki temu wycena będzie dokładniejsza.",
+        "cta": "Wyślij pełny brief",
+        "subject": "Brief projektu",
+        "questions": [
+          "Firma i branża:",
+          "Co chcesz osiągnąć:",
+          "Czego potrzebujesz (strona, aplikacja, automatyzacja, projekt UX/UI):",
+          "Termin:",
+          "Budżet (orientacyjnie):",
+          "Linki (obecna strona, przykłady):"
+        ]
+      }
+    }
   }
 }

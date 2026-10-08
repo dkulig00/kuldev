@@ -1,4 +1,4 @@
-import { expect, Locator, Page, test } from '@playwright/test';
+import { expect, Locator, test } from '@playwright/test';
 
 type SampledWindow = Window & { minRevealOpacity: number };
 
@@ -62,96 +62,5 @@ test.describe('reveal animation with motion enabled', () => {
     await reveal.scrollIntoViewIfNeeded();
 
     await expect.poll(() => opacityOf(reveal)).toBe('1');
-  });
-});
-
-type FaderWindow = Window & { capTransforms: string[] };
-
-function firstCap(page: Page) {
-  return page.locator('#uslugi [data-scroll]').nth(1);
-}
-
-function transformOf(locator: Locator) {
-  return locator.evaluate((element) => getComputedStyle(element).transform);
-}
-
-async function sampleCapTransforms(page: Page) {
-  await page.addInitScript(() => {
-    const sampled = window as unknown as FaderWindow;
-    sampled.capTransforms = [];
-
-    const sample = () => {
-      const cap = document.querySelectorAll('#uslugi [data-scroll]')[1];
-
-      if (cap) {
-        const transform = getComputedStyle(cap).transform;
-
-        if (!sampled.capTransforms.includes(transform)) {
-          sampled.capTransforms.push(transform);
-        }
-      }
-
-      requestAnimationFrame(sample);
-    };
-
-    requestAnimationFrame(sample);
-  });
-}
-
-async function expectCapNeverMoved(page: Page) {
-  await page.waitForLoadState('networkidle');
-  // Keep sampling for a while after hydration to catch a late jump.
-  await page.waitForTimeout(1500);
-
-  await expect(firstCap(page)).toHaveAttribute('data-scroll', 'static');
-
-  const transforms = await page.evaluate(
-    () => (window as unknown as FaderWindow).capTransforms,
-  );
-  expect(transforms).toHaveLength(1);
-}
-
-test.describe('fader scroll transform with motion enabled', () => {
-  test.use({ reducedMotion: 'no-preference' });
-
-  test.describe('on a small screen', () => {
-    test.use({ viewport: { width: 375, height: 400 } });
-
-    test('faders below the fold move as the section scrolls in', async ({
-      page,
-    }) => {
-      await page.goto('/pl');
-
-      const cap = firstCap(page);
-      await expect(cap).not.toBeInViewport();
-      await expect(cap).toHaveAttribute('data-scroll', 'active');
-      await page.waitForLoadState('networkidle');
-
-      const before = await transformOf(cap);
-      await page.locator('#kontakt').scrollIntoViewIfNeeded();
-
-      await expect.poll(() => transformOf(cap)).not.toBe(before);
-    });
-
-    test('faders linked via #uslugi never move', async ({ page }) => {
-      await sampleCapTransforms(page);
-
-      await page.goto('/pl#uslugi');
-
-      await expectCapNeverMoved(page);
-    });
-  });
-
-  test.describe('on a tall screen', () => {
-    test.use({ viewport: { width: 1280, height: 1600 } });
-
-    test('faders visible from the start never move', async ({ page }) => {
-      await sampleCapTransforms(page);
-
-      await page.goto('/pl');
-      await expect(firstCap(page)).toBeInViewport();
-
-      await expectCapNeverMoved(page);
-    });
   });
 });

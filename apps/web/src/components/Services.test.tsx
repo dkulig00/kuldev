@@ -1,29 +1,25 @@
 import { cleanup, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import pl from '../../messages/pl.json';
-import { MotionProvider } from './motion';
 import { Services } from './Services';
 
-const channels = Object.entries(pl.services.items).map(([id, item]) => ({
+const services = Object.entries(pl.services.items).map(([id, item]) => ({
   id,
   title: item.title,
   description: item.description,
   features: item.features,
-  ctaLabel: item.cta,
 }));
 
 function renderServices() {
-  return render(
-    <MotionProvider>
-      <Services
-        heading={pl.services.heading}
-        channels={channels}
-        closing={pl.services.closing}
-        ctaHref="#kontakt"
-        level={0.75}
-      />
-    </MotionProvider>,
-  );
+  return render(<Services heading={pl.services.heading} services={services} />);
+}
+
+function serviceBlocks() {
+  const heading = screen.getByRole('heading', { level: 2, name: 'Usługi' });
+
+  return within(heading.parentElement as HTMLElement)
+    .getAllByRole('listitem')
+    .filter((item) => item.parentElement?.previousElementSibling === heading);
 }
 
 describe('Services', () => {
@@ -38,30 +34,27 @@ describe('Services', () => {
     );
   });
 
-  it('renders every channel with its title, description and three features', () => {
+  it('renders every service as a block with title, description and features', () => {
     renderServices();
 
-    const items = screen
-      .getByRole('heading', { level: 2, name: 'Usługi' })
-      .parentElement?.querySelectorAll(':scope > ul > li');
+    const blocks = serviceBlocks();
+    expect(blocks).toHaveLength(4);
 
-    expect(items).toHaveLength(4);
-
-    items?.forEach((item, index) => {
-      const channel = channels[index];
-      const scope = within(item as HTMLElement);
+    blocks.forEach((block, index) => {
+      const service = services[index];
+      const scope = within(block);
 
       expect(
-        scope.getByRole('heading', { level: 3, name: channel.title }),
+        scope.getByRole('heading', { level: 3, name: service.title }),
       ).toBeInTheDocument();
-      expect(scope.getByText(channel.description)).toBeInTheDocument();
-      channel.features.forEach((feature) => {
+      expect(scope.getByText(service.description)).toBeInTheDocument();
+      service.features.forEach((feature) => {
         expect(scope.getByText(feature)).toBeInTheDocument();
       });
     });
   });
 
-  it('numbers channels 01 to 04 and hides the numbers from screen readers', () => {
+  it('numbers services 01 to 04 and hides the numbers from screen readers', () => {
     renderServices();
 
     ['01', '02', '03', '04'].forEach((number) => {
@@ -69,32 +62,9 @@ describe('Services', () => {
     });
   });
 
-  it('links every channel to #kontakt with a distinct, descriptive label', () => {
+  it('has no links inside the service blocks', () => {
     renderServices();
 
-    const labels = channels.map((channel) => channel.ctaLabel);
-
-    expect(new Set(labels).size).toBe(labels.length);
-    labels.forEach((label) => {
-      expect(screen.getByRole('link', { name: label })).toHaveAttribute(
-        'href',
-        '#kontakt',
-      );
-    });
-  });
-
-  it('renders the closing statement', () => {
-    renderServices();
-
-    expect(screen.getByText(pl.services.closing)).toBeInTheDocument();
-  });
-
-  it('gives every channel a decorative fader track', () => {
-    const { container } = renderServices();
-
-    expect(container.querySelectorAll('[data-scroll]')).toHaveLength(8);
-    container.querySelectorAll('[data-scroll]').forEach((element) => {
-      expect(element.closest('[aria-hidden="true"]')).not.toBeNull();
-    });
+    expect(screen.queryAllByRole('link')).toHaveLength(0);
   });
 });

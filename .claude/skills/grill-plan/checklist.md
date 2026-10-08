@@ -96,8 +96,16 @@ from reviews here (short item, why, example from this repo).
 
 - **375 px (iPhone SE).** Every UI change; E2E runs an iPhone SE project and
   `layout-overflow.spec.ts` guards horizontal scroll.
-- **WCAG AA in both themes.** ADR 0002: light `ink` on amber/cyan is 1.56:1 -
-  disallowed. Check every new color pair, in every theme the plan touches.
+- **WCAG AA in both themes.** ADR 0009 lists every used token pair with its
+  measured contrast (e.g. `accent` as text in the light theme is 2.32:1 -
+  disallowed, `accent-text` takes that role). Check every new color pair, in
+  both themes, and add it to the table.
+- **Two responsive trees from the same data duplicate `id`s.**
+  Why: axe reports `duplicate-id-aria`, and `aria-controls` in the visible
+  tree can point into the hidden one.
+  Example: services as tabs (desktop) and an accordion (phone) rendered from
+  the same `serviceIds`; each tree needs its own `id` prefix (`svc-tab-*`,
+  `svc-acc-*`) and a test that the section has no duplicate `id`s.
 - **Identical link texts with different targets.** General rule (no incident
   in this repo yet): screen readers list links out of context, so repeated
   texts need distinct accessible names.
@@ -115,6 +123,13 @@ from reviews here (short item, why, example from this repo).
   ancestors or descendants.
 - **Slow or failed JS chunk.** Hiding and revealing must live in the same lazy
   chunk, so a failed chunk leaves content visible.
+- **Layout that depends on hydration shifts in view (CLS).**
+  Why: anything that changes geometry after hydration moves content the
+  user is already looking at.
+  Example: tab panels hidden only after hydration, and the technology strip
+  switching from a wrapped list to a single moving line. The inline script in
+  `<head>` sets `data-js` before the first paint; CSS that needs JavaScript is
+  scoped to `[data-js]`.
 
 ## 9. Truth in the UI
 
@@ -154,3 +169,14 @@ from reviews here (short item, why, example from this repo).
   the plan does not work around it: plan in `docs/plans/YYYY-MM-DD-slug.md`,
   one concern per commit, PR instead of a push to `main`, tests for every
   behavior change.
+
+## 14. Internal consistency of the plan
+
+- **The same value or state described in two places must match.**
+  Why: the implementer picks one of them at random; the other one is a bug
+  waiting in the review.
+  Example: two color tables in the workflow plan gave different text colors
+  for the accent button in the light theme; the Hero phrase was rendered by
+  the server as "agentów AI" while the animation started from "strony",
+  changing the H1 in view on hydration. Describe each value once (one table,
+  one section) and let other places refer to it.

@@ -5,8 +5,8 @@ Status: accepted
 
 ## Context
 
-The "Studio" direction (ADR 0002) calls for a site with character, and motion
-is part of that. Without shared rules, each component would add its own
+The visual direction (ADR 0009, previously ADR 0002) calls for a site with
+character, and motion is part of that. Without shared rules, each component would add its own
 effects: scattered fade-ups, animated layout properties, and content hidden
 until JavaScript loads. That hurts accessibility, Core Web Vitals and the
 "not a template" positioning.
@@ -32,7 +32,7 @@ until JavaScript loads. That hurts accessibility, Core Web Vitals and the
 - A motion primitive may change an element's state only while the element is
   off-screen: fully below the viewport, with no `location.hash` targeting the
   element, an ancestor or a descendant. Otherwise it stays static in its end
-  state. `Reveal` and `ScrollTransform` both follow this rule.
+  state. `Reveal` follows this rule.
 - The Hero has no entrance animation.
 - Animated parts are small client components in `src/components/motion/`.
   Sections stay Server Components and only wrap their content. ESLint blocks

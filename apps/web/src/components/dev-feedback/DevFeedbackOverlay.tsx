@@ -145,7 +145,7 @@ export function DevFeedbackOverlay() {
         type="button"
         aria-pressed={inspecting}
         onClick={() => setInspecting((on) => !on)}
-        className="bg-accent-amber text-background fixed right-4 bottom-4 z-50 flex min-h-11 min-w-11 items-center justify-center rounded-md px-4 text-sm font-medium"
+        className="bg-accent text-accent-ink fixed right-4 bottom-4 z-50 flex min-h-11 min-w-11 items-center justify-center rounded-md px-4 text-sm font-medium"
       >
         {inspecting ? 'Wyłącz zaznaczanie' : 'Zaznacz element'}
       </button>
@@ -158,7 +158,7 @@ export function DevFeedbackOverlay() {
 
       {hover && (
         <div
-          className="border-accent-amber bg-accent-amber/10 pointer-events-none fixed z-40 border-2"
+          className="border-accent bg-accent/10 pointer-events-none fixed z-40 border-2"
           style={{
             top: hover.rect.top,
             left: hover.rect.left,
@@ -166,7 +166,7 @@ export function DevFeedbackOverlay() {
             height: hover.rect.height,
           }}
         >
-          <span className="bg-accent-amber text-background absolute -top-6 left-0 px-2 py-0.5 text-xs font-medium">
+          <span className="bg-accent text-accent-ink absolute -top-6 left-0 px-2 py-0.5 text-xs font-medium">
             {hover.name}
           </span>
         </div>
@@ -177,7 +177,7 @@ export function DevFeedbackOverlay() {
           ref={dialogRef}
           aria-labelledby="dev-feedback-title"
           onClose={() => setDraft(null)}
-          className="bg-panel text-ink m-auto w-full max-w-md rounded-md p-4 shadow-lg backdrop:bg-black/40"
+          className="bg-surface text-ink m-auto w-full max-w-md rounded-md p-4 shadow-lg backdrop:bg-black/40"
         >
           <h2 id="dev-feedback-title" className="text-lg font-semibold">
             Uwaga dla AI
@@ -225,7 +225,7 @@ export function DevFeedbackOverlay() {
               type="button"
               onClick={submitFeedback}
               disabled={status === 'sending'}
-              className="bg-accent-amber text-background min-h-11 rounded-md px-4 font-medium disabled:opacity-60"
+              className="bg-accent text-accent-ink min-h-11 rounded-md px-4 font-medium disabled:opacity-60"
             >
               {status === 'sending' ? 'Wysyłanie…' : 'Wyślij'}
             </button>

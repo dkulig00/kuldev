@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import type { AriaAttributes, ReactNode } from 'react';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Header } from './Header';
 
 vi.mock('@/i18n/navigation', () => ({
@@ -25,15 +25,36 @@ vi.mock('@/i18n/navigation', () => ({
 }));
 
 describe('Header', () => {
-  it('renders logo, nav items, language switcher and CTA', () => {
+  beforeEach(() => {
+    vi.stubGlobal(
+      'matchMedia',
+      vi.fn(() => ({
+        matches: false,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      })),
+    );
+  });
+
+  afterEach(() => {
+    cleanup();
+    vi.unstubAllGlobals();
+  });
+
+  it('renders logo, nav items, language switcher, theme toggle and CTA', () => {
     render(
       <Header
         navItems={[{ id: 'kontakt', label: 'Kontakt' }]}
         ctaLabel="Wyceń projekt"
         ctaHref="#kontakt"
         currentLocale="pl"
+        themeLabel="Ciemny motyw"
       />,
     );
+
+    expect(
+      screen.getByRole('button', { name: 'Ciemny motyw' }),
+    ).toHaveAttribute('aria-pressed', 'true');
 
     expect(screen.getByRole('link', { name: 'kuldev' })).toHaveAttribute(
       'href',

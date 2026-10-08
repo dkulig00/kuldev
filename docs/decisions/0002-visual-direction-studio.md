@@ -1,7 +1,7 @@
 # 0002: Visual direction — Studio (analog mixing console)
 
 Date: 2026-10-02
-Status: accepted
+Status: superseded by [0009](0009-visual-direction-workflow.md)
 
 ## Context
 

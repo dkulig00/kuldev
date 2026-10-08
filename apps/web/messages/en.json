@@ -5,12 +5,18 @@
   },
   "nav": {
     "uslugi": "Services",
+    "oMnie": "About",
     "kontakt": "Contact"
   },
+  "theme": {
+    "dark": "Dark theme"
+  },
   "hero": {
-    "title": "Automations. AI first",
-    "subtitle": "I design and build digital products for businesses that want to look and work differently from the competition.",
-    "cta": "Get a quote"
+    "eyebrow": "Automation, AI and software for businesses",
+    "title": "I build AI agents for your business.",
+    "subtitle": "Systems that answer enquiries, prepare documents and move data between your tools on their own. Your team gets time back for what really matters.",
+    "cta": "Get a quote",
+    "servicesCta": "See services"
   },
   "services": {
     "heading": "Services",
@@ -22,8 +28,7 @@
           "fast on phones and desktops, easy for search engines to find",
           "accessible to every user (WCAG standard)",
           "tune-ups for existing sites: speed, SEO, ease of use"
-        ],
-        "cta": "Ask about websites and web apps"
+        ]
       },
       "mobile": {
         "title": "Mobile apps",
@@ -31,19 +36,17 @@
         "features": [
           "one app for both Android and iPhone",
           "connected to your systems and data",
-          "designed for touch, not squeezed down from a website"
-        ],
-        "cta": "Ask about mobile apps"
+          "designed for touch"
+        ]
       },
       "automation": {
         "title": "Automations and AI agents",
         "description": "Software that takes over repetitive work: reports, documents, handling enquiries, moving data between systems.",
         "features": [
-          "finding where your team loses the most time",
+          "finding where the team loses the most time",
           "AI agents that answer customer questions or work with your company documents",
           "integrations with the tools you already use"
-        ],
-        "cta": "Ask about automations and AI agents"
+        ]
       },
       "design": {
         "title": "UX/UI design",
@@ -51,16 +54,60 @@
         "features": [
           "wireframes and visual design that fit your brand",
           "testing on real screen sizes",
-          "a consistent design system built for years of growth"
-        ],
-        "cta": "Ask about UX/UI design"
+          "a consistent design system that lasts for years"
+        ]
       }
-    },
-    "closing": "I build every project from scratch and ship it with automated tests. Before anything reaches you, the code goes through quality checks, accessibility checks and testing on real phones. You get a product that works today and can grow tomorrow."
+    }
+  },
+  "about": {
+    "heading": "About me",
+    "name": "Dariusz Kulig",
+    "role": "Founder of kuldev. I design and write code.",
+    "paragraphs": [
+      "I build software for businesses from idea to launch: I design the interface, write the code and make sure everything runs fast and without errors.",
+      "I enjoy projects where technology takes repetitive work off people the most. Before I build anything, I look at where your team loses the most time, and that is where I start.",
+      "You work with me directly, with no middlemen, so you always know who is responsible for your project."
+    ],
+    "principlesLabel": "How I work",
+    "principles": [
+      {
+        "title": "Tested code",
+        "description": "Every feature has automated tests, so changes do not break what already works."
+      },
+      {
+        "title": "Accessible and fast",
+        "description": "Sites and apps run smoothly on any phone and for every user."
+      },
+      {
+        "title": "Clear communication",
+        "description": "I show progress regularly and say plainly what is done and what is not yet."
+      }
+    ]
   },
   "contact": {
-    "heading": "Contact",
-    "body": "Describe your project and I'll get back to you with a concrete proposal within 1-2 business days.",
-    "emailLabel": "Send an email"
+    "heading": "Let's talk about your project",
+    "body": "Choose how you want to start. I reply within 12 hours with a concrete proposal.",
+    "paths": {
+      "short": {
+        "title": "Short message",
+        "description": "A few sentences about what you need. We'll work out the rest in a call.",
+        "cta": "Write a short message",
+        "subject": "Inquiry from kuldev.pl"
+      },
+      "brief": {
+        "title": "Full brief",
+        "description": "An email with ready questions about goals, scope, timeline and budget, so the estimate is more accurate.",
+        "cta": "Send a full brief",
+        "subject": "Project brief",
+        "questions": [
+          "Company and industry:",
+          "What you want to achieve:",
+          "What you need (website, app, automation, UX/UI design):",
+          "Timeline:",
+          "Budget (approximate):",
+          "Links (current site, examples):"
+        ]
+      }
+    }
   }
 }
