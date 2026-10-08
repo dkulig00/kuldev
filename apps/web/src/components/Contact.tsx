@@ -17,7 +17,7 @@ interface ContactProps {
 
 const primaryAction =
   'bg-accent text-accent-ink border-accent-text hover:bg-accent/85';
-const secondaryAction = 'text-ink border-line hover:border-accent-text';
+const secondaryAction = 'text-ink border-muted hover:border-accent-text';
 
 export function Contact({ heading, body, paths }: Readonly<ContactProps>) {
   return (
